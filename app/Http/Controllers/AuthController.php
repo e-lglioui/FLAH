@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
-class AuthController extends Controller
+class AuthController extends Controller 
 {
     public function register(Request $request){
         $registerUserData = $request->validate([
