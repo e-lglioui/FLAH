@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('region');
             $table->string('ville');
             $table->string('adress');
+            $table->engin='InnoDb';
             $table->timestamps();
         });
     }

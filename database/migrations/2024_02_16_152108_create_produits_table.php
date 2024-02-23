@@ -18,12 +18,11 @@ return new class extends Migration
             $table->integer('prix');
             $table->integer('quantite');
             //foring key categorie
-            $table->integer('category')->unsigned()->index()->nullable();
-            $table->foreign('category')->references('id')->on('categorie')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained();
               //foring key table forniseur
-            $table->integer('owner')->unsigned()->index()->nullable();
-            $table->foreign('owner')->references('id')->on('forniseur')->onDelete('cascade');
+            $table->foreignId('forniseur_id')->constrained();
             $table->timestamps();
+        $table->engin='InnoDb';
         });
     }
 
