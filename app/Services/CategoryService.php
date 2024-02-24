@@ -25,8 +25,7 @@ class CategoryService
 
     public function create(array $data)
     {
-        $existingCategory = $this->categoryRepository->getByAttributes(['name' => $data['name']]);
-        
+        $existingCategory = $this->categoryRepository->getByAttributes(['nom' => $data['nom']]);
         if ($existingCategory) {
             return $this->updateCategory($existingCategory->id, $data);
         }

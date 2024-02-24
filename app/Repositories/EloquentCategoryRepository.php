@@ -1,37 +1,37 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Category;
+use App\Models\Categorie;
 
 class EloquentCategoryRepository implements CrudRepositoryInterface
 {
     public function getAll()
     {
-        return Category::all();
+        return Categorie::all();
     }
 
     public function getById($id)
     {
-        return Category::find($id);
+        return Categorie::find($id);
     }
 
     public function create(array $data)
     {
-        return Category::create($data);
+        return Categorie::create($data);
     }
 
     public function update($id, array $data)
     {
-        $category = Category::find($id);
+        $category = Categorie::find($id);
         $category->update($data);
         return $category;
     }
 
     public function delete($id)
     {
-        return Category::destroy($id);
+        return Categorie::destroy($id);
     }
-    public function getByAttributes(){
-        return Category::where($attributes)->first();
+    public function getByAttributes(array $attributes){
+        return Categorie::where($attributes)->first();
     }
 }
