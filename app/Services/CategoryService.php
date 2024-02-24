@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\CategoryRepositoryInterface;
+use App\Repositories\CrudRepositoryInterface;
 
 class CategoryService
 {
     protected $categoryRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(CrudRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
@@ -23,8 +23,13 @@ class CategoryService
         return $this->categoryRepository->getById($id);
     }
 
-    public function createCategory(array $data)
+    public function create(array $data)
     {
+        $existingCategory = $this->categoryRepository->getByAttributes(['name' => $data['name']]);
+        
+        if ($existingCategory) {
+            return $this->updateCategory($existingCategory->id, $data);
+        }
         return $this->categoryRepository->create($data);
     }
 
