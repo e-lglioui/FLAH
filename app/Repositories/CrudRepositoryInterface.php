@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface CrudgoryRepositoryInterface
+interface CrudRepositoryInterface
 {
     public function getAll();
     public function getById($id);

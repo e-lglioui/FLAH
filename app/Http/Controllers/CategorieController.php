@@ -35,7 +35,7 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories',
+            'nom' => 'required|unique:categories',
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +50,7 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories,name,' . $id,
+            'nom' => 'required|unique:categories,nom,' . $id,
         ]);
 
         if ($validator->fails()) {
@@ -77,3 +77,7 @@ class CategorieController extends Controller
         }
     }
 }
+// //{
+//     "nom": "Animale",
+//     "descreption":"vache"
+// }.
