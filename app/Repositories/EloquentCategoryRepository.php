@@ -31,4 +31,7 @@ class EloquentCategoryRepository implements CrudRepositoryInterface
     {
         return Category::destroy($id);
     }
+    public function getByAttributes(){
+        return Category::where($attributes)->first();
+    }
 }
