@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\CrudRepositoryInterface;
+use App\Repositories\CategorieRepositoryInterface;
 
-class CategoryService
+class CategorieService
 {
     protected $categoryRepository;
 
-    public function __construct(CrudRepositoryInterface $categoryRepository)
+    public function __construct(CategorieRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }

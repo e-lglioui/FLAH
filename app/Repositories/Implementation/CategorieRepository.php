@@ -1,9 +1,9 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Implementation;
 
 use App\Models\Categorie;
-
-class EloquentCategoryRepository implements CrudRepositoryInterface
+use App\Repositories\CategorieRepositoryInterface;
+class CategorieRepository implements CategorieRepositoryInterface
 {
     public function getAll()
     {

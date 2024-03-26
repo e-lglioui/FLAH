@@ -3,14 +3,18 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\CrudRepositoryInterface;
-use App\Repositories\EloquentCategoryRepository;
+use App\Repositories\CategorieRepositoryInterface;
+use App\Repositories\Implementation\CategorieRepository;
+
+use App\Repositories\ProduitRepositoryInterface;
+use App\Repositories\Implementation\ProduitRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(CrudRepositoryInterface::class, EloquentCategoryRepository::class);
+        $this->app->bind(CategorieRepositoryInterface::class,CategorieRepository::class);
+        $this->app->bind(ProduitRepositoryInterface::class,ProduitRepository::class);
     }
 }
 

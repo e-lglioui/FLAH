@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CategoryService;
+use App\Services\CategorieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -10,7 +10,7 @@ class CategorieController extends Controller
 {
     protected $categoryService;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategorieService $categoryService)
     {
         $this->categoryService = $categoryService;
     }
@@ -36,6 +36,7 @@ class CategorieController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories',
+            'descreption' => 'required|unique:categories',
         ]);
 
         if ($validator->fails()) {
@@ -51,6 +52,7 @@ class CategorieController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories,nom,' . $id,
+            'descreption' => 'required|unique:categories,nom,' . $id,
         ]);
 
         if ($validator->fails()) {

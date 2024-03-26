@@ -3,62 +3,79 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produit;
+use App\Services\ProduitService;
 use App\Http\Requests\StoreProduitRequest;
 use App\Http\Requests\UpdateProduitRequest;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class ProduitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $ProduitService;
+
+    public function __construct(ProduitService $ProduitService)
     {
-        //
+        $this->ProduitService = $ProduitService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index()
+    {
+        $produit = $this->ProduitService->getAllProduits();
+        return response()->json($produit);
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProduitRequest $request)
+ 
+    public function store(Request $request)
     {
-        //
+        if (auth()->check()) {
+            $requestData = $request->all();
+            $requestData['id_user'] = auth()->user()->id;
+    
+            $validator = Validator::make($requestData, [
+                'nom' => 'required',
+                'description' => 'required',
+                'prix' => 'required',
+                'quantite' => 'required',
+                'category_id' => 'required',
+                'id_user' => 'required',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 422);
+            }
+    
+            $Produit = $this->ProduitService->create($requestData);
+    
+            return response()->json($Produit, 201);
+        } else {
+            
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(Produit $produit)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+  
     public function edit(Produit $produit)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(UpdateProduitRequest $request, Produit $produit)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Produit $produit)
     {
         //
