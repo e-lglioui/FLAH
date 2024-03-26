@@ -20,7 +20,7 @@ return new class extends Migration
             //foring key categorie
             $table->foreignId('category_id')->constrained();
               //foring key table forniseur
-            $table->foreignId('forniseur_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         $table->engin='InnoDb';
         });

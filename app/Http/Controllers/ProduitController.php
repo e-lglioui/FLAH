@@ -8,6 +8,8 @@ use App\Http\Requests\StoreProduitRequest;
 use App\Http\Requests\UpdateProduitRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 class ProduitController extends Controller
 {
     private $ProduitService;
@@ -33,7 +35,7 @@ class ProduitController extends Controller
     {
         if (auth()->check()) {
             $requestData = $request->all();
-            $requestData['id_user'] = auth()->user()->id;
+            $requestData['forniseur_id'] = auth()->user()->id;
     
             $validator = Validator::make($requestData, [
                 'nom' => 'required',
@@ -41,7 +43,7 @@ class ProduitController extends Controller
                 'prix' => 'required',
                 'quantite' => 'required',
                 'category_id' => 'required',
-                'id_user' => 'required',
+                'forniseur_id' => 'required',
             ]);
     
             if ($validator->fails()) {

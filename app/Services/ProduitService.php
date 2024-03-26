@@ -15,7 +15,19 @@ class ProduitService
 
     public function getAllProduits()
     {
-        return $this->ProduitRepository->getAll();
+        $data = $this->ProduitRepository->getAll();
+
+        if ($data != null)  {
+            return [
+                "message" => 'Succes',
+                "productList" => $data
+            ];
+        } else {
+            return [
+                "message" => "database empty",
+                "productList" => null
+            ];
+        }
     }
 
     public function getProduitById($id)

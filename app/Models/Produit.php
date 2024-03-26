@@ -9,6 +9,14 @@ use App\Models\Categorie;
 class Produit extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nom', 
+        'description',
+        'prix',
+        'quantite',
+        'category_id',
+        'forniseur_id',
+    ];
 
     public function categorie(){
         return $this->belongsTo(Categorie::class);
