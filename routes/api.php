@@ -16,7 +16,7 @@ use App\Http\Controllers\CategorieController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/
+// */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -28,3 +28,4 @@ Route::post('logout',[AuthController::class,'logout'])->middleware('auth:sanctum
 
 Route::apiResource('produits', ProduitController::class)->middleware('auth:sanctum');;
 Route::apiResource('categories', CategorieController::class);
+Route::post('categories/categorie', [CategorieController::class,'categorie']);

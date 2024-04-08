@@ -31,7 +31,13 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         return Categorie::destroy($id);
     }
-    public function getByAttributes(array $attributes){
-        return Categorie::where($attributes)->first();
+
+    public function getByAttributes($attributes){
+        $categorie = Categorie::where('nom', $attributes)->first();
+        if($categorie){
+            return $categorie;
+        }
+            return false;
+        
     }
 }

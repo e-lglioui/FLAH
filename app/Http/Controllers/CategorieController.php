@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Services\CategorieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Produit;
+use App\Models\Categorie;
+use Illuminate\Support\Facades\Auth;
+use App\utils\ResponseMessage;
 
 class CategorieController extends Controller
 {
@@ -36,7 +40,7 @@ class CategorieController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories',
-            'descreption' => 'required|unique:categories',
+            'descreption' => 'unique:categories',
         ]);
 
         if ($validator->fails()) {
@@ -78,6 +82,74 @@ class CategorieController extends Controller
             return response()->json(['error' => 'Category not found.'], 404);
         }
     }
+    
+    public function categorie(Request $request) {
+        // if (!auth()->check()) {
+        //     return "Unauthenticated";
+        // }
+
+        $categorie = $this->categoryService->categoieExiste($request->nom);
+        
+        if($categorie != null) {
+            
+            if ($request->productList == null) {
+                return "message";
+            }
+            
+            $productList = $request->productList;
+
+            foreach($productList as $produit) {
+                    Produit::create([
+                        'nom' => $produit['nom'],
+                        'description' => $produit['description'],
+                        'prix' => $produit['prix'],
+                        'quantite' => $produit['quantite'],
+                        'category_id' => $categorie->id,
+                        'user_id' => 2
+                    ]);
+            }
+            
+            $dataJson = [
+                "categorie" => $categorie,
+                "products" => $productList
+            ];
+
+            $responseMessage = new ResponseMessage (
+                "Produit ajouté",
+                "info",
+                "201",
+                (object) $dataJson
+            );
+
+            return response()->json($responseMessage);
+        }
+
+        $categorie = Categorie::create([
+            "nom" => $request->name,
+        ]);
+        
+        if($categorie) {
+            $produitListe = $request->produit;
+            
+            foreach($produitListe as $produit) {
+                $newProduit = Produit::create([
+                    'nom' => $produit['nom'],
+                    'description' => $produit['description'],
+                    'prix' => $produit['prix'],
+                    'quantite' => $produit['quantite'],
+                    'category_id' => $categorie->id,
+                    'user_id' => 2
+                ]);
+            }
+            
+            return response()->json(['message' => 'Produits ajoutés, ajout de la catégorie']);
+            
+        
+    }
+}
+    
+
+
 }
 // //{
 //     "nom": "Animale",

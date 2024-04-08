@@ -41,5 +41,9 @@ class CategorieService
     {
         return $this->categoryRepository->delete($id);
     }
+
+    public function categoieExiste($attributes){
+        return $this->categoryRepository->getByAttributes( $attributes);
+    }
 }
 
