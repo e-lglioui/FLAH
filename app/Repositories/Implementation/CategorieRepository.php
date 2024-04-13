@@ -3,6 +3,7 @@ namespace App\Repositories\Implementation;
 
 use App\Models\Categorie;
 use App\Repositories\CategorieRepositoryInterface;
+
 class CategorieRepository implements CategorieRepositoryInterface
 {
     public function getAll()
