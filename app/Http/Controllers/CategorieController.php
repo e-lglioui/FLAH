@@ -56,7 +56,8 @@ class CategorieController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories,nom,' . $id,
-            'descreption' => 'required|unique:categories,nom,' . $id,
+            'descreption' => 'required|unique:categorie
+            s,nom,' . $id,
         ]);
 
         if ($validator->fails()) {
@@ -82,6 +83,9 @@ class CategorieController extends Controller
             return response()->json(['error' => 'Category not found.'], 404);
         }
     }
+
+
+    
     
     public function categorie(Request $request) {
         // if (!auth()->check()) {
