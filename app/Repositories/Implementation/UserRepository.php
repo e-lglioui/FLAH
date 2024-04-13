@@ -33,17 +33,36 @@ class UserRepository implements UserRepositoryInterface
         return User::destroy($id);
     }
 
-    public function getByAttributes($attributes){
-        $user = User::where('nom', $attributes)->first();
-        if($categorie){
-            return $user;
-        }
-            return false;
-        
-    }
     public function getRole($id)
     {
-    
+        $user = User::findOrFail($id);
+        return $user->role;
+    }
+
+
+    public function getByAttributes(array $attributes)
+    {
+        $query = User::query();
+
+        foreach ($attributes as $key => $value) {
+            switch ($key) {
+                case 'type':
+                    $query->where('type', $value);
+                    break;
+                case 'name':
+                    $query->where('name', 'like', '%' . $value . '%');
+                    break;
+                case 'region':
+                    $query->where('region', $value);
+                    break;
+                case 'ville':
+                    $query->where('ville', $value);
+                    break;
+                
+            }
+        }
+
+        return $query->get();
     }
 
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('type')->default(true);//person ou entreprise
+            $table->boolean('type')->default(true);//actif ou non
             $table->string('region')->default(null);
             $table->string('ville')->default(null);
             $table->string('adress')->default(null);
