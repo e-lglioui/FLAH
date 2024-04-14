@@ -65,4 +65,13 @@ class UserRepository implements UserRepositoryInterface
         return $query->get();
     }
 
+
+    public function blockUser($id)
+{
+    $user = $this->getById($id);
+    $user->type = false; 
+    $user->save();
+    return $user;
+}
+
 }

@@ -41,12 +41,12 @@ class ProduitService
         return $this->ProduitRepository->create($data);
     }
 
-    public function updateCategory($id, array $data)
+    public function updateProduit($id, array $data)
     {
         return $this->ProduitRepository->update($id, $data);
     }
 
-    public function deleteCategory($id)
+    public function deleteProduit($id)
     {
         return $this->ProduitRepository->delete($id);
     }
