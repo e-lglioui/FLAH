@@ -1,5 +1,12 @@
-@include('includes.header')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Incluez le fichier CSS de Tailwind CSS depuis un CDN -->
+</head>
+<body>
 <div class="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
   style="background-image: url('{{ asset('img/vache.jpg') }}')">
   <div class="max-w-md mx-auto text-center  bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
