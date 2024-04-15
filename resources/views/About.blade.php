@@ -1,5 +1,5 @@
 @include('includes.header')
-
+@include('includes.navbar')
 <section>
 <div class="relative h-screen w-full">
     <img src="{{ asset('img/about.jpg') }}" alt="Background Image" class="absolute inset-0 w-full h-full object-cover filter blur-sm">
