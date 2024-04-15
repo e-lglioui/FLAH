@@ -4,7 +4,7 @@ new Chart(document.getElementById('order-chart'), {
         labels: generateNDays(7),
         datasets: [
             {
-                label: 'Active',
+                label: 'Selles',
                 data: generateRandomData(7),
                 borderWidth: 1,
                 fill: true,
@@ -14,7 +14,7 @@ new Chart(document.getElementById('order-chart'), {
                 tension: .2
             },
             {
-                label: 'Completed',
+                label: 'Order',
                 data: generateRandomData(7),
                 borderWidth: 1,
                 fill: true,
@@ -24,7 +24,7 @@ new Chart(document.getElementById('order-chart'), {
                 tension: .2
             },
             {
-                label: 'Canceled',
+                label: 'Canceled order',
                 data: generateRandomData(7),
                 borderWidth: 1,
                 fill: true,
