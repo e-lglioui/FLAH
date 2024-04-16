@@ -1,5 +1,6 @@
+@extends('admin.dashboard')
 
-
+@section('content')
 <div class="bg-white p-10 md:w-2/3 lg:w-1/2 mx-auto rounded">
     <form action="{{ route('categorie.store') }}" method="POST">
         @csrf
@@ -17,5 +18,5 @@
         </div>
     </form>
 </div>
-
+@endsection
 

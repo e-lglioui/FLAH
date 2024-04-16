@@ -17,8 +17,7 @@ use App\Http\Controllers\CategorieController;
 Route::get('/about', function () {
     return view('about');
 });
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 Route::resource('admin/categorie', CategorieController::class);
-

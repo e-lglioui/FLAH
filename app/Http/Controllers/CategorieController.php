@@ -34,7 +34,7 @@ class CategorieController extends Controller
         $category = $this->categoryService->getCategoryById($id);
 
         if ($category) {
-            return view('categorie-show', compact('category'));
+            return view('admin.categorie-show', compact('category'));
         } else {
             return view('404');
         }
@@ -56,14 +56,14 @@ class CategorieController extends Controller
 
         $category = $this->categoryService->create($request->all());
 //    dd( $category);
-        return redirect()->route('categories.index')->with('success', 'Catégorie créée avec succès');
+        return redirect()->route('categorie.index')->with('success', 'Catégorie créée avec succès');
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories,nom,' . $id,
-            'description' => 'required|unique:categories,description,' . $id,
+            'descrption' => 'required|unique:categories,descrption,' . $id,
         ]);
 
         if ($validator->fails()) {
@@ -73,7 +73,7 @@ class CategorieController extends Controller
         $category = $this->categoryService->updateCategory($id, $request->all());
 
         if ($category) {
-            return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès');
+            return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès');
         } else {
             return view('404');
         }
@@ -84,7 +84,7 @@ class CategorieController extends Controller
         $result = $this->categoryService->deleteCategory($id);
 
         if ($result) {
-            return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès');
+            return redirect()->route('categorie.index')->with('success', 'Catégorie supprimée avec succès');
         } else {
             return view('404');
         }
@@ -145,4 +145,10 @@ class CategorieController extends Controller
             }
         }
     }
+    public function edit($id)
+{
+    $category = $this->categoryService->getCategoryById($id);
+    return view('admin.categorie-edit', compact('category'));
 }
+}
+

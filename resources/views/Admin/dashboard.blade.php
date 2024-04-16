@@ -10,10 +10,12 @@
     <!-- end navbar -->
 
       <!-- Content -->
-        <div class="p-6">
+        <div class="p-6" >
 
             {{-- @include('admin.statistique') --}}
-            @include('admin.categorie-create')
+            {{-- @include('admin.categorie-create') --}}
+
+            @yield('content')
         </div>
       <!-- End Content -->
     </main>
