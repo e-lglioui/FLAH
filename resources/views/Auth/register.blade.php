@@ -1,13 +1,27 @@
 @include('includes.header')
 @include('includes.navbar')
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            @if(session('error'))
+                <li>{{ session('error') }}</li>
+            @endif
+        </ul>
+    </div>
+@endif
+
 <div class="bg-gradient-to-br from-green-500 to-green-200 min-h-screen flex flex-col justify-center items-center">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-md">
         <a href="home" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('img/Flah.png') }}" class="h-20" alt="Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white  text-green-500 ">Flah</span>
         </a>
-        <form class="space-y-6" action="{{ route('register') }}">
+        <form class="space-y-6" action="{{ route('signup') }}" method="post">
+            @csrf
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="name">
                     Nom
@@ -19,7 +33,7 @@
                 <label class="block text-gray-700 font-bold mb-2" for="region">
                     Region
                 </label>
-                <select id="regions" name="regions">
+                <select id="regions" name="region">
                     <option value="Tanger-Tétouan-Al Hoceïma">Tanger-Tétouan-Al Hoceïma</option>
                     <option value="L'Oriental">L'Oriental</option>
                     <option value="Fès-Meknès">Fès-Meknès</option>
@@ -67,8 +81,8 @@
                     type="text">
             </div>
             <div>
-                <button class="w-full bg-green-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg">
-                    Log In
+                <button class="w-full bg-green-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg" type="submit" name="submit">
+                    Register
                 </button>
             </div>
         </form>
@@ -81,20 +95,21 @@
 
   
     
-function addCityOption(cityName) {
+    function addCityOption(cityName) {
     let cityContainer = document.getElementById('citiesContainer');
-    let checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.name = 'city[]'; 
-    checkbox.value = cityName;
-    checkbox.id = cityName.toLowerCase().replace(/\s+/g, ''); 
+    let radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'ville';
+    radio.value = cityName;
+    radio.id = cityName.toLowerCase().replace(/\s+/g, '');
     let label = document.createElement('label');
     label.htmlFor = cityName.toLowerCase().replace(/\s+/g, '');
     label.textContent = cityName;
-    cityContainer.appendChild(checkbox);
+    cityContainer.appendChild(radio);
     cityContainer.appendChild(label);
-    cityContainer.appendChild(document.createElement('br')); 
+    cityContainer.appendChild(document.createElement('br'));
 }
+
 
 
     document.getElementById('regions').addEventListener('change', function () {

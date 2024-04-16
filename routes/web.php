@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategorieController;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\CategorieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +23,8 @@ Route::get('/about', function () {
 Route::resource('admin/categorie', CategorieController::class);
 Route::get('/login', [AuthController::class,'login'])->name('login');
 Route::get('/register', [AuthController::class,'register'])->name('register');
-Route::post('/register', [AuthController::class,'singup'])->name('register');
-Route::post('/login', [AuthController::class,'singin'])->name('login');
+Route::post('/register', [AuthController::class, 'signup'])->name('signup');
+Route::post('/login', [AuthController::class,'singin'])->name('singin');
 
 Route::get('/admin', function () {
     return view('admin.dashboard');

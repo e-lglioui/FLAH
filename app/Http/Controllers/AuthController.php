@@ -7,56 +7,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Services\UserService;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+
+
+    protected $userService;
+
+    public function __construct(UserService $userService)
     {
-        try {
-            $registerUserData = Validator::make($request->all(), [
-                'name' => 'required|string',
-                'email' => 'required|string|email|unique:users',
-                'password' => 'required|min:8'
-            ]);
-
-
-            if ($registerUserData->fails()) {
-                return response()->json([
-                    'erreur' => $registerUserData->errors(),
-                    'message' => 'validation failed',
-                    'status' => false
-                ], 401);
-            }
-
-            $user = User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-            ]);
-            $wallet = Wallet::create([
-                'type' => 'standard',
-                'id' => Str::uuid(),
-                'user_id' => $user->id,
-                'solde' => 0
-            ]);
-
-            
-
-            return response()->json([   
-                'token' => $user->createToken("API Token")->plainTextToken,
-                'message' => 'User Created',
-                'status' => true,
-                'wallet solde' => $wallet->solde,
-                'uuid' => Uuid::fromBytes($wallet->id)->toString()
-            ], 201);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'message' => $th->getMessage(),
-                'status' => false
-            ], 500);
-        }
+        $this->userService = $userService;
     }
+
+    public function  signup(Request $request)
+{
+    try {
+        $registerUserData = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'ville' => 'required|string',
+            'region' => 'required|string',
+            'password' => 'required|min:8'
+        ]);
+
+        if ($registerUserData->fails()) {
+            // dd( $registerUserData);
+            return redirect()->back()->withErrors($registerUserData)->withInput();
+        }
+
+        $user = $this->userService->Register($request->all());
+
+        return redirect()->route('categorie.index')->with('success', 'Utilisateur créé avec succès');
+    } catch (\Exception $exception) {
+        // dd('$registerUserData ');
+        return redirect()->back()->withInput()->withErrors(['error' => $exception->getMessage()]);
+       
+        
+    }
+}
 
     
     public function login(Request $request)
@@ -104,5 +93,9 @@ class AuthController extends Controller
         return response()->json([
             "message" => "logged out"
         ]);
+    }
+
+    public function register(){
+        return view('auth.register');
     }
 }
