@@ -17,7 +17,13 @@ use App\Http\Controllers\CategorieController;
 Route::get('/about', function () {
     return view('about');
 });
+Route::resource('admin/categorie', CategorieController::class);
+Route::get('/login', [AuthController::class,'login'])->name('login');
+Route::get('/register', [AuthController::class,'register'])->name('register');
+Route::post('/register', [AuthController::class,'singup'])->name('register');
+Route::post('/login', [AuthController::class,'singin'])->name('login');
+
 Route::get('/admin', function () {
     return view('admin.dashboard');
 });
-Route::resource('admin/categorie', CategorieController::class);
+
