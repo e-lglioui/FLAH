@@ -12,8 +12,8 @@
       <!-- Content -->
         <div class="p-6">
 
-            {{-- statistique simple des selles et de produit et categories --}}
-          @include('fornisseur.statistique')
+            {{-- @include('admin.statistique') --}}
+            @include('admin.categorie-create')
         </div>
       <!-- End Content -->
     </main>

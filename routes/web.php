@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::get('/about', function () {
     return view('about');
 });
 Route::get('/', function () {
-    return view('fornisseur.dashboard');
+    return view('admin.dashboard');
 });
+Route::resource('admin/categorie', CategorieController::class);
 
