@@ -26,4 +26,14 @@ class Produit extends Model
     public function forniseur(){
         return $this->belongsTo(User::class);
     }
+
+    public function paniers()
+{
+    return $this->belongsToMany(Panier::class)->withPivot('quantite');
+}
+
+public function commandes()
+    {
+        return $this->belongsToMany(Commande::class)->withPivot('quantite');
+    }
 }

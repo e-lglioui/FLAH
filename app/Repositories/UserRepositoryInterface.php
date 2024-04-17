@@ -12,5 +12,6 @@ interface UserRepositoryInterface
     public function delete($id);//delate a fornisseur
     public function blockUser($id);
     public function getByAttributes(array $attributes);
+    public function checkemail($email);
 
 }

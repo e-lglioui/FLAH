@@ -22,7 +22,11 @@ class CategorieController extends Controller
     public function index()
     {
         $categories = $this->categoryService->getAllCategories();
-        return response()->json($categories);
+        return view('admin.categorie', compact('categories'));
+    }
+
+    public function create(){
+        return view('admin.categorie-create');
     }
 
     public function show($id)
@@ -30,45 +34,48 @@ class CategorieController extends Controller
         $category = $this->categoryService->getCategoryById($id);
 
         if ($category) {
-            return response()->json($category);
+            return view('admin.categorie-show', compact('category'));
         } else {
-            return response()->json(['error' => 'Category not found.'], 404);
+            return view('404');
         }
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nom' => 'required|unique:categories',
-            'descreption' => 'unique:categories',
-        ]);
+       $validator = Validator::make($request->all(), [
+       'nom' => 'required|unique:categories',
+       'descrption' => 'required',
+]);
 
+// dd($request);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
+            //  dd($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
+            
         }
 
         $category = $this->categoryService->create($request->all());
-
-        return response()->json($category, 201);
+//    dd( $category);
+        return redirect()->route('categorie.index')->with('success', 'Catégorie créée avec succès');
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'nom' => 'required|unique:categories,nom,' . $id,
-            'descreption' => 'required|unique:categories,nom,' . $id,
+            'descrption' => 'required|unique:categories,descrption,' . $id,
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $category = $this->categoryService->updateCategory($id, $request->all());
 
         if ($category) {
-            return response()->json($category);
+            return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès');
         } else {
-            return response()->json(['error' => 'Category not found.'], 404);
+            return view('404');
         }
     }
 
@@ -77,84 +84,71 @@ class CategorieController extends Controller
         $result = $this->categoryService->deleteCategory($id);
 
         if ($result) {
-            return response()->json(['message' => 'Category deleted successfully']);
+            return redirect()->route('categorie.index')->with('success', 'Catégorie supprimée avec succès');
         } else {
-            return response()->json(['error' => 'Category not found.'], 404);
+            return view('404');
         }
     }
 
+    public function categorie(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required',
+            'productList' => 'required|array',
+            'productList.*.nom' => 'required',
+            'productList.*.description' => 'required',
+            'productList.*.prix' => 'required|numeric',
+            'productList.*.quantite' => 'required|numeric',
+        ]);
 
-    
-    
-    public function categorie(Request $request) {
-        // if (!auth()->check()) {
-        //     return "Unauthenticated";
-        // }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        $categorie = $this->categoryService->categoieExiste($request->nom);
-        
-        if($categorie != null) {
-            
-            if ($request->productList == null) {
-                return "message";
-            }
-            
+        $categorie = $this->categoryService->categorieExiste($request->nom);
+
+        if ($categorie) {
             $productList = $request->productList;
 
-            foreach($productList as $produit) {
+            foreach ($productList as $produit) {
+                Produit::create([
+                    'nom' => $produit['nom'],
+                    'description' => $produit['description'],
+                    'prix' => $produit['prix'],
+                    'quantite' => $produit['quantite'],
+                    'category_id' => $categorie->id,
+                    'user_id' => Auth::id() 
+                ]);
+            }
+
+            return redirect()->route('categories.index')->with('success', 'Produits ajoutés avec succès');
+        } else {
+            $categorie = Categorie::create([
+                "nom" => $request->nom,
+            ]);
+
+            if ($categorie) {
+                $produitListe = $request->productList;
+
+                foreach ($produitListe as $produit) {
                     Produit::create([
                         'nom' => $produit['nom'],
                         'description' => $produit['description'],
                         'prix' => $produit['prix'],
                         'quantite' => $produit['quantite'],
                         'category_id' => $categorie->id,
-                        'user_id' => 2
+                        'user_id' => Auth::id() // You may want to use the authenticated user's ID here
                     ]);
+                }
+
+                return redirect()->route('categories.index')->with('success', 'Produits ajoutés, catégorie créée avec succès');
             }
-            
-            $dataJson = [
-                "categorie" => $categorie,
-                "products" => $productList
-            ];
-
-            $responseMessage = new ResponseMessage (
-                "Produit ajouté",
-                "info",
-                "201",
-                (object) $dataJson
-            );
-
-            return response()->json($responseMessage);
         }
-
-        $categorie = Categorie::create([
-            "nom" => $request->name,
-        ]);
-        
-        if($categorie) {
-            $produitListe = $request->produit;
-            
-            foreach($produitListe as $produit) {
-                $newProduit = Produit::create([
-                    'nom' => $produit['nom'],
-                    'description' => $produit['description'],
-                    'prix' => $produit['prix'],
-                    'quantite' => $produit['quantite'],
-                    'category_id' => $categorie->id,
-                    'user_id' => 2
-                ]);
-            }
-            
-            return response()->json(['message' => 'Produits ajoutés, ajout de la catégorie']);
-            
-        
     }
+    public function edit($id)
+{
+    $category = $this->categoryService->getCategoryById($id);
+    return view('admin.categorie-edit', compact('category'));
 }
-    
-
-
 }
-// //{
-//     "nom": "Animale",
-//     "descreption":"vache"
-// }.
+

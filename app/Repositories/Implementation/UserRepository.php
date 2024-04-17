@@ -73,5 +73,8 @@ class UserRepository implements UserRepositoryInterface
     $user->save();
     return $user;
 }
-
+public function checkemail($email){
+    $user = User::where('email',$email)->first();
+    return $user;
+}
 }

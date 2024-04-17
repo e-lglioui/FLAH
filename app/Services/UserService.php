@@ -23,13 +23,18 @@ public function totalUser(){
 
 // }
 
-public function Register(){
-    $user = $this->UserRepository->getAll();
-    if(!user){
-        
+public function Register($data)
+{
+    $email = $data['email'];
+    $user = $this->UserRepository->checkemail($email);
+    
+    if (!$user) {
+        $user = $this->UserRepository->create($data);
     }
-
+    
+    return false;
 }
+
 
 
 
