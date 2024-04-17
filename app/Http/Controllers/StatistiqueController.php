@@ -58,4 +58,6 @@ class StatistiqueController extends Controller
         'totalproduit','totalcategorie'));
     }
 
+    
+
 }

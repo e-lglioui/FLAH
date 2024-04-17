@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function demande()
+{
+    return $this->hasOne(Demande::class);
+}
+
+public function panier()
+{
+    return $this->hasOne(Panier::class);
+}
+
+
+public function produit(){
+    return $this->hasMany(Produit::class);
+}
 }

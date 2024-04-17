@@ -23,7 +23,7 @@ Route::get('/about', function () {
     return view('about');
 });
 Route::resource('admin/categorie', CategorieController::class);
-Route::get('/admin',[StatistiqueController::class,'index']);
+Route::get('/admin',[StatistiqueController::class,'index'])->name('admin');
 Route::get('/login', [AuthController::class,'login'])->name('login');
 Route::get('/register', [AuthController::class,'register'])->name('register');
 Route::post('/register', [AuthController::class, 'signup'])->name('signup');
