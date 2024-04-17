@@ -17,7 +17,8 @@ class CategorieFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'descrption' => $this->faker->sentence(),
+            'nom' => $this->faker->randomElement(['Machin', 'Animaux', 'Alimentation','Semences','Insecticides','Engrais']),
         ];
     }
 }

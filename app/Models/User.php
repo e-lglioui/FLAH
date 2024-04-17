@@ -24,6 +24,7 @@ class User extends Authenticatable
         'region',
         'ville',
         'adress',
+        'role_id',
     ];
 
     /**

@@ -7,7 +7,8 @@
             <img src="{{ asset('img/Flah.png') }}" class="h-20" alt="Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white  text-green-500 ">Flah</span>
         </a>
-        <form class="space-y-6">
+        <form class="space-y-6" action="{{ route('singin') }}" method="post">
+            @csrf
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="email">
                     Email
@@ -23,7 +24,7 @@
                     type="password">
             </div>
             <div>
-                <button class="w-full bg-green-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg">
+                <button class="w-full bg-green-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg " type="submit" name="submit">
                     Log In
                 </button>
             </div>

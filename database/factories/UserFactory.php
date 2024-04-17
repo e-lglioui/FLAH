@@ -29,6 +29,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'type' => $this->faker->randomElement([1, 0]),
+            'role_id' => $this->faker->randomElement(['1', '2', '3']),
+            'region' => $this->faker->randomElement(['Rabat-Salé-Kénitra', 'Casablanca-Settat', 'Marrakech-Safi', 'Fès-Meknès', 'Tanger-Tétouan-Al Hoceïma', 'Beni Mellal-Khénifra', 'Draâ-Tafilalet', 'Souss-Massa', 'Oriental', 'Laâyoune-Sakia El Hamra', 'Dakhla-Oued Ed-Dahab']),
+        'ville' => $this->faker->randomElement(['Tanger', 'Tétouan', 'Al Hoceïma','Oujda']),
+            'adress' => $this->faker->address,
+         
         ];
     }
 

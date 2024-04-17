@@ -1,7 +1,7 @@
 @include('includes.header')
 @include('includes.navbar')
 
-@if($errors->any())
+{{-- @if($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach($errors->all() as $error)
@@ -12,7 +12,7 @@
             @endif
         </ul>
     </div>
-@endif
+@endif --}}
 
 <div class="bg-gradient-to-br from-green-500 to-green-200 min-h-screen flex flex-col justify-center items-center">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-md">
