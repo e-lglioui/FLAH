@@ -4,7 +4,7 @@
     <!--sidenav -->
     @include('../includes.sidebare')
     <!-- end sidenav -->
-    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-green-200 min-h-screen transition-all main">
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-white-200 min-h-screen transition-all main">
     <!-- navbar -->
      @include('../includes.profilenav')
     <!-- end navbar -->

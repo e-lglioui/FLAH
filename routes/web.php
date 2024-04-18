@@ -22,6 +22,9 @@ use App\Http\Controllers\statistiqueController;
 Route::get('/about', function () {
     return view('about');
 });
+Route::get('/d', function () {
+    return view('fornisseur.dashboard');
+});
 Route::resource('admin/categorie', CategorieController::class);
 Route::get('/admin',[StatistiqueController::class,'index'])->name('admin');
 Route::get('/login', [AuthController::class,'login'])->name('login');
