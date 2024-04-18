@@ -7,7 +7,7 @@
                 <h2 class="text-2xl font-semibold mb-4">All Categories</h2>
 
                 <div class="mb-4">
-                    <a href="{{ route('categorie.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                    <a href="{{ route('categorie.create') }}" class="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                         Create New Category
                     </a>
                 </div>
