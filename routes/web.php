@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\DemmandeController;
+use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\statistiqueController;
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +29,8 @@ Route::get('/login', [AuthController::class,'login'])->name('login');
 Route::get('/register', [AuthController::class,'register'])->name('register');
 Route::post('/register', [AuthController::class, 'signup'])->name('signup');
 Route::post('/login', [AuthController::class,'singin'])->name('singin');
-Route::get('/contact', [DemmandeController::class,'contact'])->name('contact');
-Route::post('/contact', [DemmandeController::class,'demmande'])->name('demmande');
+Route::get('/contact', [DemandeController::class,'contact'])->name('contact');
+Route::post('/contact', [DemandeController::class,'demmande'])->name('demmande');
 Route::get('/logout/success', function () {
     return view('logout');
 })->name('logout.success');

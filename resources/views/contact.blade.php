@@ -78,17 +78,10 @@
         </div>
       </div>
     </section>
-</div>
+  </div>
 
-<div class="grid lg:grid-cols-2 items-center justify-items-center gap-5">
-    <div class="order-2 lg:order-1 flex flex-col justify-center items-center">
+
         @include('demande')
-    </div>
-        <div class="order-1 lg:order-2">
-            <img class="h-100 w-80 object-cover lg:w-[300px] lg:h-[300px]" src="{{ asset('img/contact.png') }}" >
-        <div>
-</div>
 
 
-    
-{{-- @include('includes.footer') --}}
+@include('includes.footer')
