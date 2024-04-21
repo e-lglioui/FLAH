@@ -40,6 +40,7 @@ public function demmande(Request $request)
         'type' => $validatedData['type'],
         'certification' => $certificatPath,
         'matricule' => $validatedData['matricule'] ?? null,
+        'statue'=>0
     ]);
 
 
@@ -48,20 +49,18 @@ public function demmande(Request $request)
 
 public function index()
 {
-    $total=Demande::all()->count();
-    $V=Demande::where('type','veterinaire')->get();
-    $F=Demande::where('type','Fournisseur')->get();
-    
+    $total = Demande::all()->count();
+    $encour = Demande::where('statue', 0)->get();
+    $V = $encour->filter(function ($item) {
+        return $item->type === 'veterinaire';
+    });
 
-    // dd($nbrV);
-    return view('admin.gestionUser', compact('total','V','F'));
-    //le nom de v ou f
-    //le tele 
-    //email
-    //matrecul ou certificat
-
-
+    $F = $encour->filter(function ($item) {
+        return $item->type === 'Fournisseur';
+    });
+    return view('admin.gestionUser', compact('total', 'V', 'F'));
 }
+
 public function destroy($id)
 {
     $demande = Demande::find($id);
@@ -74,11 +73,29 @@ public function destroy($id)
     }
 }
 
-      public function veterinaire ($id){
-        try{
 
-        }catch(\Exception $exception){
+public function veterinaire($id)
+{
+    try {
+        $demande = Demande::find($id);
 
+        if (!$demande) {
+            return redirect()->back()->with('error', 'Demande non trouvée.');
         }
-      }
+
+        $role = $demande->user->role_id;
+//role 1 agri
+        if ($role == 1) {
+            $demande->user->role_id = 3;
+            $demande->statue = 1; 
+            $demande->save(); 
+            return redirect()->back()->with('success', 'Rôle modifié et demande mise à jour avec succès.');
+        } else {
+            return redirect()->back()->with('info', 'Aucun changement nécessaire.');
+        }
+    } catch (\Exception $exception) {
+        return redirect()->back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer plus tard.');
+    }
+}
+
 }
