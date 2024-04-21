@@ -89,7 +89,31 @@ public function veterinaire($id)
             $demande->user->role_id = 3;
             $demande->statue = 1; 
             $demande->save(); 
-            return redirect()->back()->with('success', 'Rôle modifié et demande mise à jour avec succès.');
+            return redirect()->back()->with('success', 'accepter la demande de veterinaire.');
+        } else {
+            return redirect()->back()->with('info', 'Aucun changement nécessaire.');
+        }
+    } catch (\Exception $exception) {
+        return redirect()->back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer plus tard.');
+    }
+}
+
+
+public function fornissuer($id){
+    try {
+        $demande = Demande::find($id);
+
+        if (!$demande) {
+            return redirect()->back()->with('error', 'Demande non trouvée.');
+        }
+
+        $role = $demande->user->role_id;
+//role 1 agri
+        if ($role == 1) {
+            $demande->user->role_id = 2;
+            $demande->statue = 1; 
+            $demande->save(); 
+            return redirect()->back()->with('success', 'accepter la demde de fornisseur');
         } else {
             return redirect()->back()->with('info', 'Aucun changement nécessaire.');
         }

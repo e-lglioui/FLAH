@@ -57,4 +57,55 @@
         </div>
     </div>
 </div>
+<div class="py-12  ">
+    <div class="max-w-8xl mx-auto sm:px-6 lg:px-10">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <h2 class="text-2xl font-semibold mb-4">Demandes des Fornissueur</h2>
+
+    
+                @if($F->count() > 0)
+                    <table class="w-ful divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom de cabinet</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom du vétérinaire</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Région</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Matricule</th>
+                                <th class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($F as $fornissuer)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->nom_entreprise }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->user->name}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->user->email}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->user->region}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->user->ville}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $fornissuer->matricule}}</td>
+                                    <td class="px-1 py-4 whitespace-nowrap">
+                                        <a href="{{ route('fornissuer', $fornissuer->id) }}" class="text-green-500 hover:text-green-700 ml-2 ">Accept</a>
+
+                                        <form action="{{ route('destroy', $veterinaire->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-700">Supprimer</button>
+                                        </form>
+                                       
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>Aucune demande de Fornisseur disponible.</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

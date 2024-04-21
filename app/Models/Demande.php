@@ -15,6 +15,7 @@ class Demande extends Model
         'type',
         'matricule',
         'certification',
+        'statue',
     ];
 
     public function user()
