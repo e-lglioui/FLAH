@@ -48,14 +48,37 @@ public function demmande(Request $request)
 
 public function index()
 {
+    $total=Demande::all()->count();
+    $V=Demande::where('type','veterinaire')->get();
+    $F=Demande::where('type','Fournisseur')->get();
+    
+
+    // dd($nbrV);
+    return view('admin.gestionUser', compact('total','V','F'));
     //le nom de v ou f
     //le tele 
     //email
     //matrecul ou certificat
-    
+
 
 }
+public function destroy($id)
+{
+    $demande = Demande::find($id);
+    
+    if ($demande) {
+        $demande->delete();
+        return redirect()->back()->with('success', 'Demande supprimée avec succès.');
+    } else {
+        return redirect()->back()->with('error', 'La demande que vous essayez de supprimer n\'existe pas.');
+    }
+}
 
+      public function veterinaire ($id){
+        try{
 
-      
+        }catch(\Exception $exception){
+
+        }
+      }
 }

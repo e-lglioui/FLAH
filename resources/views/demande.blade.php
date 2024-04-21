@@ -1,5 +1,5 @@
 <div class="bg-white p-10 md:w-2/3 lg:w-1/2 mx-auto rounded">
-    <form action="{{ route('demmande') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('demande') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center mb-5">
             <label for="nom" class="w-50 inline-block text-right mr-4 text-gray-500">Nom de l'entreprise ou Cabinie</label>
@@ -22,7 +22,7 @@
         </div>
         <div class="text-right" id="certificate"></div>
         <button class="w-full bg-green-700 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg" type="submit" name="submit">
-            Register
+            Demande
         </button>
     </form>
 </div>
