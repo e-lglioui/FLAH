@@ -83,6 +83,10 @@ class StatistiqueController extends Controller
 
     }
 
-    
+    public function fornissuer(){
+      
+     
+        return view('fornisseur.statistique');
+    }
 
 }

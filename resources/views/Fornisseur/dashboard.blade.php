@@ -2,11 +2,11 @@
 @include('includes.header')
 <body class="text-gray-800 font-inter">
     <!--sidenav -->
-    @include('fornissuer.sidebare')
+    @include('fornisseur.sidebare')
     <!-- end sidenav -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-white-200 min-h-screen transition-all main">
     <!-- navbar -->
-     @include('fornissuer.profilenav')
+     @include('fornisseur.profilenav')
     <!-- end navbar -->
 
       <!-- Content -->
@@ -21,11 +21,11 @@
     </main>
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('js/fullscreen.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
-    {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
+    <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/tab.js') }}"></script>
      
      

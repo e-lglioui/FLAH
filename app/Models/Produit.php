@@ -16,8 +16,7 @@ class Produit extends Model
         'prix',
         'quantite',
         'category_id',
-        'forniseur_id',
-        'user_id'
+        'user_id',
     ];
 
     public function categorie(){
@@ -36,7 +35,7 @@ public function commandes()
     {
         return $this->belongsToMany(Commande::class)->withPivot('quantite');
     }
-    public function images()
+     public function images()
     {
         return $this->hasMany(Image::class);
     }

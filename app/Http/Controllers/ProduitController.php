@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produit;
 use App\Models\Image;
+use App\Models\Categorie;
 use App\Services\ProduitService;
 use App\Http\Requests\StoreProduitRequest;
 use App\Http\Requests\UpdateProduitRequest;
@@ -28,27 +29,28 @@ class ProduitController extends Controller
 
     public function create()
     {
-        return view('fornissuer.produit-create');
+        $categories=Categorie::all();
+        return view('fornisseur.produit-create',compact('categories'));
     }
 
  
     public function store(Request $request)
     {
-        if (auth()->check()) {
             $requestData = $request->all();
-            $requestData['forniseur_id'] = auth()->user()->id;
+            $requestData['user_id'] = 1;
             $validator = Validator::make($requestData, [
                 'nom' => 'required',
                 'description' => 'required',
                 'prix' => 'required',
                 'quantite' => 'required',
                 'category_id' => 'required',
-                'forniseur_id' => 'required',
+                'user_id' => 'required',
                 'images' => 'nullable|array', //liste des image
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', //valider les images
             ]);
     
             if ($validator->fails()) {
+                // dd('test');
                 return redirect()->back()->withErrors($validator)->withInput();
             }
             $produit = $this->ProduitService->create($requestData);
@@ -59,10 +61,10 @@ class ProduitController extends Controller
                 }
             }
     
-            return redirect()->route('categorie.index')->with('success', 'Produit créé avec succès');
-        } else {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+            return redirect()->route('produit.index')->with('success', 'Produit créé avec succès');
+       
+       
+        
     }
     
 

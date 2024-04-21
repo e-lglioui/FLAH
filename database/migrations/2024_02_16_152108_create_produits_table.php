@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quantite');
             //foring key categorie
             $table->foreignId('category_id')->constrained();
-              //foring key table forniseur
+              //foring key table user
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         $table->engin='InnoDb';
