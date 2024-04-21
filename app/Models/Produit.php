@@ -23,7 +23,7 @@ class Produit extends Model
     public function categorie(){
         return $this->belongsTo(Categorie::class);
     }
-    public function forniseur(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
@@ -35,5 +35,9 @@ class Produit extends Model
 public function commandes()
     {
         return $this->belongsToMany(Commande::class)->withPivot('quantite');
+    }
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
