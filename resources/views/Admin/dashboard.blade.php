@@ -2,11 +2,11 @@
 @include('includes.header')
 <body class="text-gray-800 font-inter">
     <!--sidenav -->
-    @include('../includes.sidebare')
+    @include('admin.sidebare')
     <!-- end sidenav -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-white-200 min-h-screen transition-all main">
     <!-- navbar -->
-     @include('../includes.profilenav')
+     @include('admin.profilenav')
     <!-- end navbar -->
 
       <!-- Content -->
