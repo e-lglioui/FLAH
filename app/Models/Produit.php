@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categorie;
+use App\Models\Image;
 use App\Models\User;
 
 class Produit extends Model
@@ -35,8 +36,8 @@ public function commandes()
     {
         return $this->belongsToMany(Commande::class)->withPivot('quantite');
     }
-     public function images()
+    public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class, 'produit_id', 'id');
     }
 }

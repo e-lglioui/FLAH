@@ -23,9 +23,20 @@ class ProduitController extends Controller
 
     public function index()
     {
-        $produit = $this->ProduitService->getAllProduits();
-        return view('home', compact('produit'));
+        if (Auth::check()) {
+            $user = Auth::user();
+            //  dd($user->id);
+            if ($user->role_id == 2) {
+                // dd('fornissuer');
+                $produits = $this->ProduitService->getProduitsByFournisseur($user->id);
+                // dd($produits->images);
+                return view('fornisseur.produit', compact('produits'));
+            }
+        }
+        $produits = $this->ProduitService->getAllProduits();
+        return view('home', compact('produits'));
     }
+    
 
     public function create()
     {
