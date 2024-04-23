@@ -111,5 +111,16 @@ class ProduitController extends Controller
     
         return redirect()->route('produit.index')->with('success', 'Produit supprimé avec succès');
     }
-    
+
+    public function filterByCategory($id) {
+        $produits = Produit::where('category_id', $id)->with('images')->get();;
+        $category = Categorie::findOrFail($id);
+        $categories=Categorie::all();
+        return view('produit', compact('produits', 'category','categories'));
+    }
+
+    public function newProduit(){
+        $categories=Categorie::all();
+        return view('categories',compact('categories'));
+    }
 }

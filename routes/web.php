@@ -56,6 +56,9 @@ Route::middleware(['auth', 'fornissuer'])->group(function () {
         ->name('fornissuerStatistique'); 
     Route::resource('fornisseur/produit', ProduitController::class);
 });
+Route::get('categories', [ProduitController::class, 'newProduit'])->name('produit.new');
+Route::get('categories/{id}', [ProduitController::class, 'filterByCategory'])->name('produit.category');
+Route::get('/produt/detail/{id}', [ProduitController::class, 'detail'])->name('produit.detail');
 
 Route::fallback(function () {
     return response()->view('404', [], 404); 

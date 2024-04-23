@@ -1,5 +1,5 @@
 @include('includes.header')
-@include('includes.navbar')
+{{-- @include('includes.navbar') --}}
 
 <div class="bg-gradient-to-br from-green-500 to-green-200 min-h-screen flex flex-col justify-center items-center">
     @if(session('info'))

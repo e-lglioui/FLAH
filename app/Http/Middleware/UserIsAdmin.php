@@ -20,6 +20,6 @@ class UserIsAdmin
             return $next($request); 
         }
 
-        return redirect('/home')->with('error', 'Vous n\'avez pas l\'autorisation d\'accéder à cette page.'); 
+        return redirect('/')->with('error', 'Vous n\'avez pas l\'autorisation d\'accéder à cette page.'); 
     }
 }

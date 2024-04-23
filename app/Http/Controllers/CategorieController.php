@@ -137,7 +137,7 @@ class CategorieController extends Controller
                         'prix' => $produit['prix'],
                         'quantite' => $produit['quantite'],
                         'category_id' => $categorie->id,
-                        'user_id' => Auth::id() // You may want to use the authenticated user's ID here
+                        'user_id' => Auth::id() 
                     ]);
                 }
 

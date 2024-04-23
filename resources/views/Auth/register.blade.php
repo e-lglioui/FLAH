@@ -1,5 +1,5 @@
 @include('includes.header')
-@include('includes.navbar')
+{{-- @include('includes.navbar') --}}
 
 @if(session('info'))
 <div class="bg-blue-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
