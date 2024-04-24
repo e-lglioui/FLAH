@@ -60,7 +60,7 @@ Route::middleware(['auth', 'fornissuer'])->group(function () {
 Route::get('categories', [ProduitController::class, 'newProduit'])->name('produit.new');
 Route::get('categories/{id}', [ProduitController::class, 'filterByCategory'])->name('produit.category');
 Route::get('/produt/detail/{id}', [ProduitController::class, 'detail'])->name('produit.detail');
-Route::post('/panier/ajouter', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->name('panier.ajouter');
 
 Route::fallback(function () {
     return response()->view('404', [], 404); 

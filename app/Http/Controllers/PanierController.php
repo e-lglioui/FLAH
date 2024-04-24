@@ -1,32 +1,72 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Panier;
-use App\Models\PanierProduit;
-use Illuminate\Support\Facades\Log;
+use App\Models\Produit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class PanierController extends Controller
 {
-    public function ajouter(Request $request)
+ 
+    public function ajouterAuPanier(Request $request)
     {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $produitId = $request->input('produit_id');
+            $quantite = $request->input('quantite', 1);
 
-        $users_id = auth()->id();
-        $produit_id = $request->input('produit_id');
-        $quantite = $request->input('quantite', 1);
-        $panier = Panier::firstOrCreate([
-            'users_id' =>  $users_id,
-        ]);
+            $panier = Panier::where('user_id', $userId)
+                ->where('produit_id', $produitId)
+                ->first();
 
-        $produitPanier = PanierProduit::firstOrCreate([
-            'panier_id' => $panier->id,
-            'produit_id' => $produit_id,
-        ]);
+            if ($panier) {
+                $panier->quantite += $quantite;
+                $panier->save();
+            } else {
+                Panier::create([
+                    'user_id' => $userId,
+                    'produit_id' => $produitId,
+                    'quantite' => $quantite,
+                ]);
+            }
 
-        $produitPanier->quantite += $quantite;
-        $produitPanier->save();
+            return redirect()->back()->with('success', 'Produit ajouté au panier!');
+        }
 
-        // return view('panier');
+        return redirect()->back()->with('error', 'Vous devez être connecté pour ajouter au panier.');
+    }
+
+    public function afficherPanier()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $panier = Panier::where('user_id', $userId)->get();
+
+            return view('panier', ['panier' => $panier]);
+        }
+
+        return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir votre panier.');
+    }
+
+    public function supprimerDuPanier($id)
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $panier = Panier::where('user_id', $userId)
+                ->where('id', $id)
+                ->first();
+
+            if ($panier) {
+                $panier->delete();
+                return redirect()->back()->with('success', 'Produit supprimé du panier!');
+            }
+
+            return redirect()->back()->with('error', 'Produit non trouvé.');
+        }
+
+        return redirect()->route('login')->with('error', 'Vous devez être connecté pour supprimer un produit du panier.');
     }
 }
-
