@@ -47,7 +47,7 @@
         </form>
     </div>
 </div>
-
+{{-- 
 <script>
     function validateEmail() {
         var email = document.getElementById('email').value;
@@ -64,7 +64,7 @@
     function validatePassword() {
         var password = document.getElementById('password').value;
         var passwordError = document.getElementById('password-error');
-        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        var passwordRegex = /^(?=.*[a-z])[a-zA-Z\d]{8,}$/;
 
         if (!passwordRegex.test(password)) {
             passwordError.classList.remove('hidden');
@@ -83,4 +83,4 @@
 
         return true;
     }
-</script>
+</script> --}}
