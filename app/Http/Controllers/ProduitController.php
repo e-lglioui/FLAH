@@ -80,11 +80,18 @@ class ProduitController extends Controller
     
 
   
-    public function show(Produit $produit)
-    {
-        $images = $produit->images; 
-        return view('produit.show', compact('produit', 'images'));
-    }
+    public function show($id)
+{
+    $produit = Produit::with('images')->findOrFail($id);
+    $cat=$produit->category_id;
+    $produits = Produit::where('category_id', $cat)->with('images')->get();;
+    // dd($cat);
+    $memCategorie=Categorie::with('produit')->findOrFail($cat);
+    // dd($memCategorie);
+    $categories=Categorie::all();
+    return view('produit-detail', compact('produit','memCategorie','categories','produits'));
+}
+
     
 
   
@@ -113,7 +120,8 @@ class ProduitController extends Controller
     }
 
     public function filterByCategory($id) {
-        $produits = Produit::where('category_id', $id)->with('images')->get();;
+        $produits = Produit::where('category_id', $id)->with('images')->get();
+ 
         $category = Categorie::findOrFail($id);
         $categories=Categorie::all();
         return view('produit', compact('produits', 'category','categories'));
