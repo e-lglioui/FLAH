@@ -48,7 +48,7 @@ class PanierController extends Controller
     
     public function affichePanier()
     {
-       
+        if (Auth::check()) {
         $user = Auth::user();
         // dd($user);
         $panier = Panier::where('users_id', $user->id)->with('produits')->first();
@@ -68,6 +68,9 @@ class PanierController extends Controller
             'produits' => $panier->produits,
             'total' => $total,
         ]);
+    }else{
+        return view('panier');
+    }
     }
 
 
