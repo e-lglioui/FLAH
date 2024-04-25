@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Panier;
 use App\Models\PanierProduit;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PanierController extends Controller
 {
@@ -22,7 +23,7 @@ class PanierController extends Controller
     
    
         $users_id = auth()->id();
-        
+     
    
         $produit_id = $validated['produit_id'];
         $quantite = $validated['quantite'];
@@ -45,5 +46,30 @@ class PanierController extends Controller
         return response()->json(['message' => 'Produit ajouté au panier'], 200);
     }
     
+    public function affichePanier()
+    {
+       
+        $user = Auth::user();
+        // dd($user);
+        $panier = Panier::where('users_id', $user->id)->with('produits')->first();
+        if (!$panier || $panier->produits->isEmpty()) {
+            return view('panier', [
+                'message' => 'Votre panier est vide.',
+                'produits' => [],
+                'total' => 0,
+            ]);
+        }
+
+        $total = 0;
+        foreach ($panier->produits as $produit) {
+            $total += $produit->prix * $produit->pivot->quantite;
+        }
+        return view('panier', [
+            'produits' => $panier->produits,
+            'total' => $total,
+        ]);
+    }
+
+
 }
 

@@ -61,7 +61,7 @@ Route::get('categories', [ProduitController::class, 'newProduit'])->name('produi
 Route::get('categories/{id}', [ProduitController::class, 'filterByCategory'])->name('produit.category');
 Route::get('/produt/detail/{id}', [ProduitController::class, 'detail'])->name('produit.detail');
 Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->name('panier.ajouter');
-
+Route::get('/panier', [PanierController::class, 'affichePanier'])->name('panier.affiche');
 
 Route::fallback(function () {
     return response()->view('404', [], 404); 
