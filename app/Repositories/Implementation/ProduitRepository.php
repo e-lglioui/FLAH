@@ -34,4 +34,8 @@ class ProduitRepository implements ProduitRepositoryInterface
     public function getByAttributes(array $attributes){
         return Produit::where($attributes)->first();
     }
+
+    public function fornisseur($id){
+        return Produit::where('user_id', $id)->with('images')->get();
+    }
 }

@@ -50,5 +50,10 @@ class ProduitService
     {
         return $this->ProduitRepository->delete($id);
     }
+
+
+   public function getProduitsByFournisseur($id){
+    return $this ->ProduitRepository->fornisseur($id);
+   }
 }
 

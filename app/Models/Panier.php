@@ -10,7 +10,7 @@ class Panier extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', // Si vous souhaitez que ce modèle puisse être rempli via une assignation de masse
+        'users_id', 
         'total',
     ];
 
@@ -21,6 +21,7 @@ class Panier extends Model
 
     public function produits()
     {
-        return $this->belongsToMany(Produit::class)->withPivot('quantite');
+        return $this->belongsToMany(Produit::class, 'panier_produits')->withPivot('quantite');
     }
+    
 }

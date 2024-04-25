@@ -2,18 +2,20 @@
 @include('includes.header')
 <body class="text-gray-800 font-inter">
     <!--sidenav -->
-    @include('../includes.sidebare')
+    @include('fornisseur.sidebare')
     <!-- end sidenav -->
-    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-green-200 min-h-screen transition-all main">
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-white-200 min-h-screen transition-all main">
     <!-- navbar -->
-     @include('../includes.profilenav')
+     @include('fornisseur.profilenav')
     <!-- end navbar -->
 
       <!-- Content -->
-        <div class="p-6">
+        <div class="p-6" >
 
-            {{-- statistique simple des selles et de produit et categories --}}
-          @include('fornisseur.statistique')
+            {{-- @include('admin.statistique') --}}
+            {{-- @include('admin.categorie-create') --}}
+
+            @yield('content')
         </div>
       <!-- End Content -->
     </main>

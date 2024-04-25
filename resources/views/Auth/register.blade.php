@@ -1,18 +1,17 @@
 @include('includes.header')
-@include('includes.navbar')
+{{-- @include('includes.navbar') --}}
 
-{{-- @if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-            @if(session('error'))
-                <li>{{ session('error') }}</li>
-            @endif
-        </ul>
-    </div>
-@endif --}}
+@if(session('info'))
+<div class="bg-blue-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
+    <svg viewBox="0 0 24 24" class="text-blue-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+        <path fill="currentColor"
+            d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z">
+        </path>
+    </svg>
+    <span class="text-blue-800">{{ session('info') }}</span>
+</div>
+@endif
+
 
 <div class="bg-gradient-to-br from-green-500 to-green-200 min-h-screen flex flex-col justify-center items-center">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-md">
@@ -20,7 +19,7 @@
             <img src="{{ asset('img/Flah.png') }}" class="h-20" alt="Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white  text-green-500 ">Flah</span>
         </a>
-        <form class="space-y-6" action="{{ route('signup') }}" method="post">
+        <form class="space-y-6" action="{{ route('signup') }}" method="post" onsubmit="return validateForm()">
             @csrf
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="name">
@@ -28,12 +27,14 @@
                 </label>
                 <input class="w-full px-4 py-2 rounded-lg border border-gray-400" id="name" name="name"
                     type="text">
+                    <span id="name-error" class="text-red-500 hidden">entrer nom valider </span>
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="region">
                     Region
                 </label>
                 <select id="regions" name="region">
+                    <option >select</option>
                     <option value="Tanger-Tétouan-Al Hoceïma">Tanger-Tétouan-Al Hoceïma</option>
                     <option value="L'Oriental">L'Oriental</option>
                     <option value="Fès-Meknès">Fès-Meknès</option>
@@ -65,6 +66,7 @@
                 </label>
                 <input class="w-full px-4 py-2 rounded-lg border border-gray-400" id="email" name="email"
                     type="email">
+                    <span id="email-error" class="text-red-500 hidden">Slvp entrer email address</span>
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="password">
@@ -72,6 +74,7 @@
                 </label>
                 <input class="w-full px-4 py-2 rounded-lg border border-gray-400" id="password" name="password"
                     type="password">
+                    <span id="password-error" class="text-red-500 hidden"> entrer mot de passvalider </span>
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2" for="adress">
@@ -80,6 +83,13 @@
                 <input class="w-full px-4 py-2 rounded-lg border border-gray-400" id="adress" name="adress"
                     type="text">
             </div>
+            <label class="block text-gray-700 font-bold mb-2" for="tele">
+                Telephone
+            </label>
+            <input class="w-full px-4 py-2 rounded-lg border border-gray-400" id="adress" name="tele"
+                type="text">
+                <span id="tele-error" class="text-red-500 hidden">Please enter a valid phone number</span>
+        </div>
             <div>
                 <button class="w-full bg-green-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg" type="submit" name="submit">
                     Register
@@ -193,4 +203,67 @@
               break;
 }
     });
+</script>
+<script>
+    function validateName() {
+        var name = document.getElementById('name').value;
+        var nameError = document.getElementById('name-error');
+        if (name.trim().length === 0) {
+            nameError.classList.remove('hidden');
+        } else {
+            nameError.classList.add('hidden');
+        }
+    }
+
+    function validateEmail() {
+        var email = document.getElementById('email').value;
+        var emailError = document.getElementById('email-error');
+        var emailRegex = /^\S+@\S+\.\S+$/;
+
+        if (!emailRegex.test(email)) {
+            emailError.classList.remove('hidden');
+        } else {
+            emailError.classList.add('hidden');
+        }
+    }
+
+    function validatePassword() {
+        var password = document.getElementById('password').value;
+        var passwordError = document.getElementById('password-error');
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            passwordError.classList.remove('hidden');
+        } else {
+            passwordError.classList add('hidden');
+        }
+    }
+
+    function validatePhone() {
+    var phone = document.getElementById('tele').value;
+    var phoneError = document.getElementById('tele-error');
+    var phoneRegex = /^0\d{9}$/;
+
+    if (!phoneRegex.test(phone)) {
+        phoneError.classList.remove('hidden');
+    } else {
+        phoneError.classList.add('hidden');
+    }
+}
+
+    
+
+    function validateForm() {
+        validateName();
+        validateEmail();
+        validatePassword();
+        validatePhone();
+
+        var nameError = document.getElementById('name-error').classList.contains('hidden');
+        var emailError = document.getElementById('email-error').classList.contains('hidden');
+        var passwordError = document.getElementById('password-error').classList.contains('hidden');
+        var phoneError = document.getElementById('tele-error').classList.contains('hidden');
+
+        return nameError && emailError && passwordError && phoneError;
+    }
 </script>

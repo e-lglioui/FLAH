@@ -54,59 +54,45 @@
                     <tr>
                       <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Statue</th>
                       <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Total</th>
-                      <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="text-gray-700 dark:text-gray-100">
                       <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">Terminée </th>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">4</td>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div class="flex items-center">
-                          <span class="mr-2">70%</span>
-                          <div class="relative w-full">
-                            <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                              <div style="width: 70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"></div>
-                            </div>
-                          </div>
-                        </div>
+                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-green-700 font-bold text-lg">{{$terminee}}</td>
+
+            
                       </td>
                     </tr>
                     <tr class="text-gray-700 dark:text-gray-100">
                       <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">En cours</th>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">6</td>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div class="flex items-center">
-                          <span class="mr-2">40%</span>
-                          <div class="relative w-full">
-                            <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                              <div style="width: 40%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-                            </div>
-                          </div>
-                        </div>
+                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blue-700 font-bold text-lg">{{$en_attente}}</td>
+                    
+                       
                       </td>
                     </tr>
                     <tr class="text-gray-700 dark:text-gray-100">
                       <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">Annulée</th>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">5</td>
-                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div class="flex items-center">
-                          <span class="mr-2">45%</span>
-                          <div class="relative w-full">
-                            <div class="overflow-hidden h-2 text-xs flex rounded bg-pink-200">
-                              <div style="width: 45%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"></div>
-                            </div>
-                          </div>
-                        </div>
+                      <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-red-700 font-bold text-lg ">{{$annulee}}</td>
+
+                        
                       </td>
                     </tr>
-                   
+                   {{-- total commande --}}
+                   <tr class="text-gray-700 dark:text-gray-100">
+                    <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">Total Commande</th>
+                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-bold text-lg ">{{$totalCommande}}</td>
+                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                      
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+          <canvas id="RegionChart"></canvas>
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
@@ -202,5 +188,57 @@
   }
 
   </script>
+  <script>
+    var ctx = document.getElementById('RegionChart').getContext('2d');
+    var eventCountsChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Tanger-Tétouan-Al Hoceïma', 'L\'Oriental', 'Fès-Meknès', 'Rabat-Salé-Kénitra', 'Béni Mellal-Khénifra', 'Casablanca-Settat', 'Marrakech-Safi', 'Drâa-Tafilalet', 'Souss-Massa', 'Guelmim-Oued Noun', 'Laâyoune-Sakia El Hamra', 'Dakhla-Oued Ed-Dahab'],
+            datasets: [{
+                label: 'Nombre de user ',
+                data: [{{ $Tanger }}, {{ $LOriental }}, {{ $Fes }}, {{ $Rabat }}, {{ $Mellal }}, {{ $CasablancaSettat }}, {{ $MarrakechSafi }}, {{ $Tafilalet }}, {{ $SoussMassa }}, {{ $GuelmimOuedNoun }}, {{ $Hamra }}, {{ $EdDahab }}],
+                backgroundColor: [
+                    'rgba(75, 192, 0, 0.2)',
+                    'rgba(255, 10, 54, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 0, 54, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 0, 1)',
+                    'rgba(255, 0, 54, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 0, 54, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
   </section>
     @endsection
