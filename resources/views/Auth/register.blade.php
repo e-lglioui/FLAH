@@ -47,7 +47,9 @@
                     <option value="Guelmim-Oued Noun">Guelmim-Oued Noun</option>
                     <option value="Laâyoune-Sakia El Hamra">Laâyoune-Sakia El Hamra</option>
                     <option value="Dakhla-Oued Ed-Dahab">Dakhla-Oued Ed-Dahab</option>
-                </select>>
+                </select>
+
+
 
             </div>
             <div>
@@ -102,9 +104,6 @@
 <script>
 
     let citiesContainer = document.getElementById('citiesContainer');
-
-  
-    
     function addCityOption(cityName) {
     let cityContainer = document.getElementById('citiesContainer');
     let radio = document.createElement('input');
@@ -203,8 +202,7 @@
               break;
 }
     });
-</script>
-<script>
+
     function validateName() {
         var name = document.getElementById('name').value;
         var nameError = document.getElementById('name-error');

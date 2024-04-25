@@ -15,16 +15,15 @@ class RendezVous extends Model
         'date_heure',
         'statut',
     ];
-
-    // Relation avec le modèle User (vétérinaire)
+    
     public function veterinaire()
     {
-        return $this->belongsTo(User::class, 'veterinaire_id');
+        return $this->belongsTo(User::class, 'veterinaire_id','id');
     }
 
-    // Relation avec le modèle User (client)
+
     public function client()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }
