@@ -63,7 +63,9 @@ Route::get('categories/{id}', [ProduitController::class, 'filterByCategory'])->n
 Route::get('categories/detail/{id}', [ProduitController::class, 'show'])->name('produit.detail');
 Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->name('panier.ajouter');
 Route::get('/Veterinarian', [RendezVousController::class, 'veterinaire'])->name('Veterinarian');
-
+Route::post('/Veterinarian', [RendezVousController::class, 'veterinaireFiltter'])->name('VeterinarianFiltter');
+Route::get('/Veterinarian/{id}', [RendezVousController::class, 'rendezvous'])->name('rendezvous')->middleware('auth');
+Route::post('/Veterinarian/rendezvous', [RendezVousController::class, 'reservation'])->name('reservation');
 Route::fallback(function () {
     return response()->view('404', [], 404); 
 });
