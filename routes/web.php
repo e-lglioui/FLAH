@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //AUTH CONTROLLER
-use App\Http\Auth\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 //admin controller 
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\DemandeController;
@@ -66,6 +66,19 @@ Route::middleware(['auth', 'fornissuer'])->group(function () {
         ->name('fornissuerStatistique'); 
     Route::resource('fornisseur/produit', ProduitController::class);
 });
+
+Route::middleware(['auth', 'veterenaire'])->group(function () {
+    Route::get('/dashboard', [VeterinarianController::class, 'statistiques'])
+    ->name('VeterinarianStatistique');
+    Route::get('/rendezvous', [VeterinarianController::class, 'rendezvous'])
+    ->name('Mesrendezvous'); 
+    Route::get('/rendezvous/{id}', [VeterinarianController::class, 'confermer'])
+    ->name('confermer');
+    Route::delete('/rendezvous/{id}', [VeterinarianController::class, 'anuller'])
+    ->name('anuller');
+
+});
+
 Route::get('categories', [ProduitController::class, 'newProduit'])->name('produit.new');
 Route::get('categories/{id}', [ProduitController::class, 'filterByCategory'])->name('produit.category');
 Route::get('categories/detail/{id}', [ProduitController::class, 'show'])->name('produit.detail');
@@ -78,7 +91,3 @@ Route::fallback(function () {
     return response()->view('404', [], 404); 
 });
 
-Route::middleware(['auth', 'fornissuer'])->group(function () {
-    Route::get('/dashboard', [VeterinarianController::class, 'statistiques'])
-        ->name('VeterinarianStatistique'); 
-});

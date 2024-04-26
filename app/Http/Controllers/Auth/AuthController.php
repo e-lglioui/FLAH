@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-
-
     protected $userService;
 
     public function __construct(UserService $userService)
@@ -50,7 +48,7 @@ class AuthController extends Controller
             return redirect()->route('home')->with('success', 'Connexion réussie');
     
         } catch (\Exception $exception) {
-            Log::error('Erreur lors du login : ' . $exception->getMessage());
+            // Log::error('Erreur lors du login : ' . $exception->getMessage());
             return redirect()->back()->withErrors(['error' => 'Erreur lors de la connexion'])->withInput();
         }
     }
@@ -84,7 +82,7 @@ class AuthController extends Controller
     
             return redirect()->route('login')->with('success', 'Utilisateur créé avec succès');
         } catch (\Exception $exception) {
-            \Log::error('Erreur lors de la création de l\'utilisateur : ' . $exception->getMessage());
+            Log::error('Erreur lors de la création de l\'utilisateur : ' . $exception->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => 'Une erreur s\'est produite lors de la création de l\'utilisateur. Veuillez réessayer.']);
         }
     }
