@@ -1,4 +1,4 @@
-@extends('veterinaires.dashboard')
+@extends('fornisseur.dashboard')
 
 @section('content')
 <section>

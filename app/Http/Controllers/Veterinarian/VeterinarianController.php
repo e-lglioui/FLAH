@@ -36,7 +36,7 @@ class VeterinarianController extends Controller
 
         $stable=RendezVou::where('veterinaire_id', $id)
         ->where('service', 'stable')
-        ->count;
+        ->count();
 
 
         return view('veterinaires.statistique',compact('total','rendezVousAll','rendezConfermer','rendezAnul','clinic','stable'));
