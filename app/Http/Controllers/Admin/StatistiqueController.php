@@ -1,12 +1,12 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Models\Produit;
 use App\Models\Categorie;
 use App\Models\User;
 use App\Models\Commande;
+use App\Http\Controllers\Controller;
 
 class StatistiqueController extends Controller
 {

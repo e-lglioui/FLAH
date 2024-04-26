@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Agriculteur;
+use App\Http\Controllers\Controller;
 use App\Services\CategorieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

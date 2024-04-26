@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Fornisseur;
+use App\Http\Controllers\Controller;
 use App\Models\Produit;
 use App\Models\Image;
 use App\Models\Categorie;
