@@ -1,5 +1,5 @@
 <div class="bg-white p-10 md:w-2/3 lg:w-1/2 mx-auto rounded">
-    <form action="{{ route('demande') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('demmande') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center mb-5">
             <label for="nom" class="w-50 inline-block text-right mr-4 text-gray-500">Nom de l'entreprise ou Cabinie</label>
@@ -8,6 +8,7 @@
         <div class="flex items-center mb-10">
             <label for="description" class="w-50 inline-block text-right mr-4 text-gray-500">Fournisseur ou vétérinaire</label>
             <select class="form-select" id="type" name="type" required>
+                <option >select</option>
                 <option value="fournisseur">Fournisseur</option>
                 <option value="veterinaire">Vétérinaire</option>
             </select>

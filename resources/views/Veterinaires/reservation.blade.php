@@ -74,7 +74,7 @@
        <input type="hidden" name="veterinaire_id" value="{{$id}}">
       <div class="flex items-center justify-center mb-4">
         <button
-          class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+          class="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-500 focus:outline-none focus:shadow-outline"
           type="submit" name="submit">
           Fixer le rendez-vous
         </button>
