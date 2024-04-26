@@ -203,65 +203,65 @@
 }
     });
 
-    function validateName() {
-        var name = document.getElementById('name').value;
-        var nameError = document.getElementById('name-error');
-        if (name.trim().length === 0) {
-            nameError.classList.remove('hidden');
-        } else {
-            nameError.classList.add('hidden');
-        }
-    }
+//     function validateName() {
+//         var name = document.getElementById('name').value;
+//         var nameError = document.getElementById('name-error');
+//         if (name.trim().length === 0) {
+//             nameError.classList.remove('hidden');
+//         } else {
+//             nameError.classList.add('hidden');
+//         }
+//     }
 
-    function validateEmail() {
-        var email = document.getElementById('email').value;
-        var emailError = document.getElementById('email-error');
-        var emailRegex = /^\S+@\S+\.\S+$/;
+//     function validateEmail() {
+//         var email = document.getElementById('email').value;
+//         var emailError = document.getElementById('email-error');
+//         var emailRegex = /^\S+@\S+\.\S+$/;
 
-        if (!emailRegex.test(email)) {
-            emailError.classList.remove('hidden');
-        } else {
-            emailError.classList.add('hidden');
-        }
-    }
+//         if (!emailRegex.test(email)) {
+//             emailError.classList.remove('hidden');
+//         } else {
+//             emailError.classList.add('hidden');
+//         }
+//     }
 
-    function validatePassword() {
-        var password = document.getElementById('password').value;
-        var passwordError = document.getElementById('password-error');
-        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+//     function validatePassword() {
+//         var password = document.getElementById('password').value;
+//         var passwordError = document.getElementById('password-error');
+//         var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
-        if (!passwordRegex.test(password)) {
-            passwordError.classList.remove('hidden');
-        } else {
-            passwordError.classList add('hidden');
-        }
-    }
+//         if (!passwordRegex.test(password)) {
+//             passwordError.classList.remove('hidden');
+//         } else {
+//             passwordError.classList add('hidden');
+//         }
+//     }
 
-    function validatePhone() {
-    var phone = document.getElementById('tele').value;
-    var phoneError = document.getElementById('tele-error');
-    var phoneRegex = /^0\d{9}$/;
+//     function validatePhone() {
+//     var phone = document.getElementById('tele').value;
+//     var phoneError = document.getElementById('tele-error');
+//     var phoneRegex = /^0\d{9}$/;
 
-    if (!phoneRegex.test(phone)) {
-        phoneError.classList.remove('hidden');
-    } else {
-        phoneError.classList.add('hidden');
-    }
-}
+//     if (!phoneRegex.test(phone)) {
+//         phoneError.classList.remove('hidden');
+//     } else {
+//         phoneError.classList.add('hidden');
+//     }
+// }
 
     
 
-    function validateForm() {
-        validateName();
-        validateEmail();
-        validatePassword();
-        validatePhone();
+//     function validateForm() {
+//         validateName();
+//         validateEmail();
+//         validatePassword();
+//         validatePhone();
 
-        var nameError = document.getElementById('name-error').classList.contains('hidden');
-        var emailError = document.getElementById('email-error').classList.contains('hidden');
-        var passwordError = document.getElementById('password-error').classList.contains('hidden');
-        var phoneError = document.getElementById('tele-error').classList.contains('hidden');
+//         var nameError = document.getElementById('name-error').classList.contains('hidden');
+//         var emailError = document.getElementById('email-error').classList.contains('hidden');
+//         var passwordError = document.getElementById('password-error').classList.contains('hidden');
+//         var phoneError = document.getElementById('tele-error').classList.contains('hidden');
 
-        return nameError && emailError && passwordError && phoneError;
-    }
+//         return nameError && emailError && passwordError && phoneError;
+//     }
 </script>

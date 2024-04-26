@@ -10,6 +10,7 @@ use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\statistiqueController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\RendezVousController;
+use App\Http\Controllers\VeterinarianController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,7 @@ Route::get('/register', [AuthController::class,'register'])->name('register');
 Route::post('/register', [AuthController::class, 'signup'])->name('signup');
 Route::post('/login', [AuthController::class,'singin'])->name('singin');
 Route::get('/contact', [DemandeController::class,'contact'])->name('contact');
-Route::get('/contact', [DemandeController::class,'contact'])->name('contact');
+Route::post('/contact', [DemandeController::class,'demmande'])->name('demmande')->middleware('auth');;
 
 Route::get('/logout/success', function () {
     return view('logout');
@@ -48,8 +49,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/categorie', CategorieController::class);
     Route::get('/admin/demande', [DemandeController::class,'index'])->name('demande');
     Route::delete('/admin/demande/{id}', [DemandeController::class, 'destroy'])->name('destroy');
-    Route::get('/admin/demande/{id}', [DemandeController::class,'veterinaire'])->name('veterinaire');
-    Route::get('/admin/demande/{id}', [DemandeController::class,'fornissuer'])->name('fornissuer');  
+    Route::get('/admin/demande/veterinaire/{id}', [DemandeController::class, 'veterinaire'])->name('veterinaireDemmande');
+    Route::get('/admin/demande/fornissuer/{id}', [DemandeController::class, 'fornissuer'])->name('fornissuerDemmande');
+     
 });
 
 
@@ -68,4 +70,9 @@ Route::get('/Veterinarian/{id}', [RendezVousController::class, 'rendezvous'])->n
 Route::post('/Veterinarian/rendezvous', [RendezVousController::class, 'reservation'])->name('reservation');
 Route::fallback(function () {
     return response()->view('404', [], 404); 
+});
+
+Route::middleware(['auth', 'fornissuer'])->group(function () {
+    Route::get('/dashboard', [VeterinarianController::class, 'statistiques'])
+        ->name('VeterinarianStatistique'); 
 });

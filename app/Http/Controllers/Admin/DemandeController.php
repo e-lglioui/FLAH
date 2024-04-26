@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Services\CategorieService;
 use Illuminate\Http\Request;
@@ -11,6 +11,7 @@ use App\Models\Demande;
 use Illuminate\Support\Facades\Auth;
 use App\utils\ResponseMessage;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 class DemandeController extends Controller
 {
 
@@ -34,8 +35,7 @@ public function demmande(Request $request)
 
   
     $demande = Demande::create([
-        'user_id' =>1, 
-        // Auth::id(), 
+        'user_id' =>Auth::id(), 
         'nom_entreprise' => $validatedData['nom_entreprise'],
         'type' => $validatedData['type'],
         'certification' => $certificatPath,
@@ -56,8 +56,9 @@ public function index()
     });
 
     $F = $encour->filter(function ($item) {
-        return $item->type === 'Fournisseur';
+        return $item->type === 'fournisseur';
     });
+    // dd($F);
     return view('admin.gestionUser', compact('total', 'V', 'F'));
 }
 
@@ -83,43 +84,62 @@ public function veterinaire($id)
             return redirect()->back()->with('error', 'Demande non trouvée.');
         }
 
-        $role = $demande->user->role_id;
-//role 1 agri
-        if ($role == 1) {
-            $demande->user->role_id = 3;
-            $demande->statue = 1; 
-            $demande->save(); 
-            return redirect()->back()->with('success', 'accepter la demande de veterinaire.');
-        } else {
-            return redirect()->back()->with('info', 'Aucun changement nécessaire.');
+        $user = $demande->user;
+
+        if ($user->role_id == 1) {
+        
+            DB::transaction(function () use ($user, $demande) {
+                $user->update(['role_id' => 3]);
+                
+                $demande->update(['statue' => 1]);
+              
+                // dd('test');
+            });
+
+            return redirect()->back()->with('success', 'Demande de vétérinaire acceptée.');
+        } else {  
+         
+            $role=$user->role->name;
+            return redirect()->back()->with('info', 'user est deja un '.$role.' dans lapplication');
         }
     } catch (\Exception $exception) {
+        DB::rollback(); 
         return redirect()->back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer plus tard.');
     }
 }
 
 
-public function fornissuer($id){
+public function fornissuer($id) {
     try {
+        DB::beginTransaction(); 
         $demande = Demande::find($id);
 
         if (!$demande) {
+            DB::rollBack(); 
             return redirect()->back()->with('error', 'Demande non trouvée.');
         }
 
-        $role = $demande->user->role_id;
-//role 1 agri
-        if ($role == 1) {
-            $demande->user->role_id = 2;
+        $user = $demande->user;
+
+        if ($user->role_id == 1) { 
+            $user->role_id = 2; 
+            $user->save(); 
+
             $demande->statue = 1; 
             $demande->save(); 
-            return redirect()->back()->with('success', 'accepter la demde de fornisseur');
+
+            DB::commit(); 
+            return redirect()->back()->with('success', 'Demande de fornissuer acceptée.');
         } else {
-            return redirect()->back()->with('info', 'Aucun changement nécessaire.');
+            DB::rollBack(); 
+            $role=$user->role->name;
+            return redirect()->back()->with('info', 'user est deja un '.$role.' dans lapplication');
         }
     } catch (\Exception $exception) {
+        DB::rollBack();
         return redirect()->back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer plus tard.');
     }
 }
 
 }
+
