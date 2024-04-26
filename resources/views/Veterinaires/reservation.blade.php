@@ -1,41 +1,86 @@
-<div class="w-screen">
-    <div class="relative mx-auto mt-20 mb-20 max-w-screen-lg overflow-hidden rounded-t-xl bg-emerald-400/60 py-32 text-center shadow-xl shadow-gray-300">
-      <h1 class="mt-2 px-8 text-3xl font-bold text-white md:text-5xl">Rendez-vous</h1>
-      <p class="mt-6 text-lg text-white">Fair rendez-vous avec vitairainaire</p>
-      <img class="absolute top-0 left-0 -z-10 h-full w-full object-cover" src="https://images.unsplash.com/photo-1504672281656-e4981d70414b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
-    </div>
-  
-    <div class="mx-auto grid max-w-screen-lg px-6 pb-20">
+@include('includes.header')
+@include('includes.navbar')
 
-  
-      <div class="">
-        <p class="mt-8 font-serif text-xl font-bold text-blue-900">Choisir la date</p>
-        <div class="relative mt-4 w-56">
-          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <svg aria-hidden="true" class="h-5 w-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-          </div>
-          <input datepicker="" datepicker-orientation="bottom" autofocus="autofocus" type="text" class="datepicker-input block w-full rounded-lg border border-emerald-300 bg-emerald-50 p-2.5 pl-10 text-emerald-800 outline-none ring-opacity-30 placeholder:text-emerald-800 focus:ring focus:ring-emerald-300 sm:text-sm" placeholder="Select date" />
-        </div>
-      </div>
-  
-      <div class="">
-        <p class="mt-8 font-serif text-xl font-bold text-blue-900">choisir heur</p>
-        <div class="mt-4 grid grid-cols-4 gap-2 lg:max-w-xl">
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">8:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">9:00</button>
-          <button class="rounded-lg bg-emerald-700 px-4 py-2 font-medium text-white active:scale-95">10:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">11:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">12:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">13:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">14:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">15:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">16:00</button>
-          <button class="rounded-lg bg-emerald-100 px-4 py-2 font-medium text-emerald-900 active:scale-95">17:00</button>
-        </div>
-      </div>
-  
-      <button class="mt-8 w-56 rounded-full border-8 border-emerald-500 bg-emerald-600 px-10 py-4 text-lg font-bold text-white transition hover:translate-y-1">Rendez-vous</button>
-    </div>
+<div class="w-screen">
+  <div class="relative mx-auto my-10 max-w-screen-lg py-32 text-center shadow-xl shadow-gray-300 overflow-hidden">
+    <h1 class="text-3xl font-bold text-orange-500 md:text-5xl">Rendez-vous</h1>
+    <p class="mt-6 text-lg text-white">Fixez un rendez-vous avec un vétérinaire</p>
+    <img class="absolute top-0 left-0 -z-10 h-full w-full object-cover" src="{{asset('img/vit4.jpg')}}" alt="veterinarian" />
   </div>
-  <script src="https://unpkg.com/flowbite@1.5.2/dist/datepicker.js"></script>
-  
+
+  <div class="container mx-auto my-10">
+    <div class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
+      Rendez-vous
+    </div>
+    <form class="py-4 px-6 bg-white shadow rounded" action="{{ route('reservation') }}" method="POST">
+      @csrf
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          Nom complet
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="name" name="name" type="text" placeholder="Entrez votre nom" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="phone">
+          Numéro de téléphone
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="phone" name="phone" type="tel" placeholder="Entrez votre numéro de téléphone" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="date">
+          Date du rendez-vous
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="date" name="date" type="date" placeholder="Sélectionnez une date" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="time">
+          Heure du rendez-vous
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="time" name="time" type="time" placeholder="Sélectionnez une heure" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="service">
+          Service
+        </label>
+        <select
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="service" name="service" required>
+          <option value="">Choisissez un service</option>
+          <option value="clinic">Visite à la clinique</option>
+          <option value="stable">Visite à l'écurie</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="message">
+          Message
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="message" name="message" rows="4" placeholder="Entrez des informations supplémentaires"></textarea>
+      </div>
+       <input type="hidden" name="veterinaire_id" value="{{$id}}">
+      <div class="flex items-center justify-center mb-4">
+        <button
+          class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+          type="submit" name="submit">
+          Fixer le rendez-vous
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
