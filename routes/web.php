@@ -3,14 +3,20 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\DemandeController;
-use App\Http\Controllers\statistiqueController;
-use App\Http\Controllers\PanierController;
-use App\Http\Controllers\RendezVousController;
-use App\Http\Controllers\VeterinarianController;
+
+//AUTH CONTROLLER
+use App\Http\Auth\Controllers\AuthController;
+//admin controller 
+use App\Http\Controllers\Admin\CategorieController;
+use App\Http\Controllers\Admin\DemandeController;
+use App\Http\Controllers\Admin\statistiqueController;
+//Fornisseur
+use App\Http\Controllers\Fornisseur\ProduitController;
+//Agriculteur Controller
+use App\Http\Controllers\Agriculteur\PanierController;
+use App\Http\Controllers\Agriculteur\RendezVousController;
+// Veterinarian controller
+use App\Http\Controllers\Veterinarian\VeterinarianController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
