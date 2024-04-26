@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Services\CategorieService;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use App\Models\Produit;
 use App\Models\Categorie;
 use Illuminate\Support\Facades\Auth;
 use App\utils\ResponseMessage;
+use App\Http\Controllers\Controller;
 
 class CategorieController extends Controller
 {
