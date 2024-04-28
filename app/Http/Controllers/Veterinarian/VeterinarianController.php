@@ -50,17 +50,13 @@ class VeterinarianController extends Controller
         $id = Auth::id(); 
         $rendezVousDuJour = RendezVou::where('veterinaire_id', $id)
                                     ->whereBetween('date_heure', [$today, $endOfDay])
+                                    ->where('statut', 'en_attente')
                                     ->get();
        $rendezVousAll=RendezVou::where('veterinaire_id', $id)
+       ->where('statut', 'en_attente')
        ->get();
 
-       $rendezConfermer=RendezVou::where('veterinaire_id', $id)
-       ->where('statut', 'confirme')
-       ->get();
-
-       $rendezAnul=RendezVou::where('veterinaire_id', $id)
-       ->where('statut', 'annule')
-       ->get();
+      
 
         return view('veterinaires.rendezvous', compact('rendezVousDuJour','rendezVousAll'));
     }
@@ -78,4 +74,15 @@ class VeterinarianController extends Controller
         return redirect()->back()->with('success', 'Rendez vous annule.');
     }
 
+    public function ListeToday(){
+        $id = Auth::id();
+        $today = Carbon::now()->startOfDay(); 
+        $endOfDay = Carbon::now()->endOfDay(); 
+        $rendezVousDuJour = RendezVou::where('veterinaire_id', $id)
+        ->whereBetween('date_heure', [$today, $endOfDay])
+        ->where('statut', 'confirme')
+        ->orderBy('date_heure', 'asc') 
+        ->get();
+      return view('veterinaires.listeToday',compact('rendezVousDuJour'));
+    }
 }

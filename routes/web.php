@@ -76,6 +76,9 @@ Route::middleware(['auth', 'veterenaire'])->group(function () {
     ->name('confermer');
     Route::delete('/rendezvous/{id}', [VeterinarianController::class, 'anuller'])
     ->name('anuller');
+    Route::get('/todayRendezvous', [VeterinarianController::class, 'ListeToday'])
+    ->name('TodayRendez'); 
+
 
 });
 
