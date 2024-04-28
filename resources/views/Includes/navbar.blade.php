@@ -28,7 +28,31 @@
           </li>
           <li>
             <a href="contact" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+          @auth
+          @if(Auth::user()->role_id == 3)
+         
+          <li>
+              <a href="{{ route('VeterinarianStatistique') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 bg-green-700 md:border-0 md:hover:text-green-700 md:p-O dark:text-white text-white dark:hover:bg-green-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</a>
           </li>
+          @elseif(Auth::user()->role_id == 4)
+          <li>
+            <a href="{{ route('admin') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 bg-green-700 md:border-0 md:hover:text-green-700 md:p-O dark:text-white text-white dark:hover:bg-green-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</a>
+        </li>
+        @elseif(Auth::user()->role_id == 2)
+        <li>
+          <a href="{{ route('fornissuerStatistique') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 bg-green-700 md:border-0 md:hover:text-green-700 md:p-O dark:text-white text-white dark:hover:bg-green-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</a>
+      </li>
+      @elseif(Auth::user())
+      <li>
+        <a href="{{route('produit.new')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Panier
+
+        </a>
+      </li>
+        @endif
+      @endauth
+      <li>
+        <a href="{{ route('login') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 bg-green-700 md:border-0 md:hover:text-green-700 md:p-O dark:text-white text-white dark:hover:bg-green-700 dark:hover:text-white md:dark:hover:bg-transparent">login</a>
+    </li>
         </ul>
       </div>
     </div>
