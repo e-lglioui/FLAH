@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DemandeController;
 use App\Http\Controllers\Admin\statistiqueController;
 //Fornisseur
 use App\Http\Controllers\Fornisseur\ProduitController;
+use App\Http\Controllers\Fornisseur\FornisseurController;
 //Agriculteur Controller
 use App\Http\Controllers\Agriculteur\PanierController;
 use App\Http\Controllers\Agriculteur\RendezVousController;
@@ -62,7 +63,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 Route::middleware(['auth', 'fornissuer'])->group(function () {
-    Route::get('/fornisseur', [StatistiqueController::class, 'fornissuer'])
+    Route::get('/fornisseur', [FornisseurController::class, 'statistique'])
         ->name('fornissuerStatistique'); 
     Route::resource('fornisseur/produit', ProduitController::class);
 });
