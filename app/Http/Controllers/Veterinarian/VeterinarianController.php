@@ -52,7 +52,6 @@ class VeterinarianController extends Controller
                                     ->whereBetween('date_heure', [$today, $endOfDay])
                                     ->get();
        $rendezVousAll=RendezVou::where('veterinaire_id', $id)
-       ->where('statut', 'en_attente')
        ->get();
 
        $rendezConfermer=RendezVou::where('veterinaire_id', $id)
