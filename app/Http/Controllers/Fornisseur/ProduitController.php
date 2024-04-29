@@ -167,4 +167,23 @@ class ProduitController extends Controller
         $categories=Categorie::all();
         return view('categories',compact('categories'));
     }
+
+
+
+    //fonction de search 
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+    
+        if (empty($query)) {
+            return response()->json([], 200);
+        }
+    
+        $produits = Produit::where('nom', 'like', '%' . $query . '%')->get();
+    
+        return response()->json($produits, 200);
+    }
+    
+
     }

@@ -45,9 +45,16 @@
             <span>Coût total</span>
             <span>{{ $total }} MAD</span>
           </div>
-          <button class="bg-green-500 font-semibold hover:bg-green-600 py-3 text-sm text-white uppercase w-full">
-                Commander
-          </button>
+          
+          <form action="{{ route('mollie') }}" method="post">
+            @csrf
+            <input type="hidden" name="product_name" value="{{ $produit->nom }}">
+            <input type="hidden" name="quantity" value="{{ $produit->pivot->quantite }}">
+            <input type="hidden" name="price" value="{{ $total }}">
+            <button type="submit" class="bg-green-500 font-semibold hover:bg-green-600 py-3 text-sm text-white uppercase w-full">
+              Commander
+        </button>
+        </form>
         </div>
       </div>
     </div>

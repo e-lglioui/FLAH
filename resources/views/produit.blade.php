@@ -1,6 +1,12 @@
 @extends('categories')
 
 @section('content')
+<div id="search-results" class="mt-4">
+    
+    {{-- resultat de recherch --}}
+    </div>
+    <script src="{{ asset('js/search.js') }}"></script>
+
 
 @if($produits->isEmpty())
     <h1>Pas de produit</h1>
