@@ -46,7 +46,7 @@
             <span>{{ $total }} MAD</span>
           </div>
           
-          <form action="{{ route('mollie') }}" method="post">
+          <form action="{{ route('payment.form') }}" method="get">
             @csrf
             <input type="hidden" name="product_name" value="{{ $produit->nom }}">
             <input type="hidden" name="quantity" value="{{ $produit->pivot->quantite }}">

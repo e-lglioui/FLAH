@@ -19,7 +19,8 @@ use App\Http\Controllers\Agriculteur\PanierController;
 use App\Http\Controllers\Agriculteur\RendezVousController;
 // Veterinarian controller
 use App\Http\Controllers\Veterinarian\VeterinarianController;
-
+//payment
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -103,11 +104,16 @@ Route::fallback(function () {
 
 
 
-//payment mollie
+//payment stripe
+Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+Route::get('/payment/success', function () {
+    return 'Payment Successful!';
+})->name('payment.success');
+Route::get('/payment/failure', function () {
+    return 'Payment Failed!';
+})->name('payment.failure');
 
 
 
-Route::post('mollie', [CommandController::class, 'mollie'])->name('mollie');
-Route::get('success', [CommandController::class, 'success'])->name('success');
-Route::get('cancel', [CommandController::class, 'cancel'])->name('cancel');
 

@@ -23,30 +23,30 @@ class FornisseurController extends Controller
         ->count();
 
         // Nombre total de ventes *
-        $totalVentes = DB::table('commande_produit')->sum('quantite');
+        $totalVentes = DB::table('panier_produits')->sum('quantite');
 
-        // Mes acheteurs en fonction de la région (groupé par région)*
-        $acheteursParRegion = DB::table('commandes')
-            ->join('users', 'commandes.user_id', '=', 'users.id')
-            ->select(DB::raw('users.region, COUNT(DISTINCT commandes.user_id) as total_acheteurs'))
+        //Mes acheteurs en fonction de la région (groupé par région)*
+        $acheteursParRegion = DB::table('paniers')
+            ->join('users', 'paniers.users_id', '=', 'users.id')
+            ->select(DB::raw('users.region, COUNT(DISTINCT paniers.users_id) as total_acheteurs'))
             ->groupBy('users.region')
             ->get();
 
         // Produit le plus acheté *
-        $produitLePlusAchete = DB::table('commande_produit')
-            ->join('produits', 'commande_produit.produit_id', '=', 'produits.id')
-            ->select(DB::raw('produits.nom, SUM(commande_produit.quantite) as total_quantite'))
+        $produitLePlusAchete = DB::table('panier_produits')
+            ->join('produits', 'panier_produits.produit_id', '=', 'produits.id')
+            ->select(DB::raw('produits.nom, SUM(panier_produits.quantite) as total_quantite'))
             ->groupBy('produits.nom')
             ->orderBy('total_quantite', 'desc')
             ->first();
 
         // Produit le moins acheté *
-        $produitLeMoinsAchete = DB::table('commande_produit')
-            ->join('produits', 'commande_produit.produit_id', '=', 'produits.id')
-            ->select(DB::raw('produits.nom, SUM(commande_produit.quantite) as total_quantite'))
-            ->groupBy('produits.nom')
-            ->orderBy('total_quantite', 'asc')
-            ->first();
+         $produitLeMoinsAchete = DB::table('panier_produits')
+        ->join('produits', 'panier_produits.produit_id', '=', 'produits.id')
+        ->select(DB::raw('produits.nom, SUM(panier_produits.quantite) as total_quantite'))
+        ->groupBy('produits.nom')
+        ->orderBy('total_quantite', 'asc')
+        ->first();
 
         // Produit le plus cher*
         $produitLePlusCher = DB::table('produits')

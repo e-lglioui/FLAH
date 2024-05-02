@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="block w-full overflow-x-auto">
-                <table class="items-center w-full bg-transparent border-collapse">
+                {{-- <table class="items-center w-full bg-transparent border-collapse">
                   <thead>
                     <tr>
                       <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Statue</th>
@@ -79,7 +79,7 @@
                       </td>
                     </tr>
                    {{-- total commande --}}
-                   <tr class="text-gray-700 dark:text-gray-100">
+                   {{-- <tr class="text-gray-700 dark:text-gray-100">
                     <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">Total Commande</th>
                     <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-bold text-lg ">{{$totalCommande}}</td>
                     <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -87,7 +87,7 @@
                     </td>
                   </tr>
                   </tbody>
-                </table>
+                </table> --}} 
               </div>
             </div>
           </div>

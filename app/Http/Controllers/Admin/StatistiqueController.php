@@ -28,7 +28,7 @@ class StatistiqueController extends Controller
         $userCreationDates = []; 
         $users = User::all();
         foreach ($users as $user) {
-            $userCreationDates[] = $user->created_at->format('M d'); 
+            $userCreationDates[] = $user; 
         }
 
 
@@ -67,11 +67,11 @@ class StatistiqueController extends Controller
         //fornisseur avec sa liste des produit et quanrtite et categorie
           
 
-         $totalCommande = Commande::count();
+        //  $totalCommande = Commande::count();
 
-        $en_attente= Commande::where('statut', 'en_attente')->count();
-         $terminee= Commande::where('statut', 'terminee')->count();
-         $annulee= Commande::where('statut', 'annulee')->count();
+        // $en_attente= Commande::where('statut', 'en_attente')->count();
+        //  $terminee= Commande::where('statut', 'terminee')->count();
+        //  $annulee= Commande::where('statut', 'annulee')->count();
 
        
          
@@ -79,7 +79,7 @@ class StatistiqueController extends Controller
 
         //nombre des visiteur non connecte
 
-        return view('admin.statistique', compact('usersCount', 'fornisseur', 'veterinarian', 'totalproduit', 'totalcategorie', 'annulee', 'terminee', 'en_attente', 'totalCommande', 'userCreationDates','Tanger','LOriental','Fes','Rabat','Mellal','CasablancaSettat','MarrakechSafi','MarrakechSafi','Tafilalet','SoussMassa','GuelmimOuedNoun','Hamra','EdDahab'));
+        return view('admin.statistique', compact('usersCount', 'fornisseur', 'veterinarian', 'totalproduit', 'totalcategorie', 'userCreationDates','Tanger','LOriental','Fes','Rabat','Mellal','CasablancaSettat','MarrakechSafi','MarrakechSafi','Tafilalet','SoussMassa','GuelmimOuedNoun','Hamra','EdDahab'));
 
     }
 

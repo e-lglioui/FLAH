@@ -18,7 +18,7 @@
         <div class="flex justify-between mb-4">
             <div>
                 <div class="flex items-center mb-1">
-                    <div class="text-2xl font-semibold">{{$produitLePlusAchete}}</div>
+                    <div class="text-2xl font-semibold">{{$produitLePlusAchete->nom}}</div>
                 </div>
                 <div class="text-sm font-medium text-gray-400"> Top Produit</div>
             </div>
@@ -28,7 +28,7 @@
     <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
         <div class="flex justify-between mb-6">
             <div>
-                <div class="text-2xl font-semibold mb-1">{{$produitLePlusAchete}}</div>
+                <div class="text-2xl font-semibold mb-1">{{$produitLeMoinsAchete->nom}}</div>
                 <div class="text-sm font-medium text-gray-400">Flop Produit</div>
             </div>
              
