@@ -109,7 +109,7 @@
 @yield('newProduct')
 
                     
- 
+@include('includes.footer')
  
   
  

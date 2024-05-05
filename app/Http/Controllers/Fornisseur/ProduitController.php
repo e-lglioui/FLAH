@@ -165,7 +165,8 @@ class ProduitController extends Controller
 
     public function newProduit(){
         $categories=Categorie::all();
-        return view('categories',compact('categories'));
+        $produits=Produit::all();
+        return view('categories',compact('categories','produits'));
     }
 
 
